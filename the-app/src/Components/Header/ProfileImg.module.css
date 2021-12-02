@@ -1,0 +1,11 @@
+.profileImg {
+    cursor: pointer;
+    display: flex;
+    width: 40px;
+    align-items: center;
+  }
+  .profileImg img {
+    height: 35px;
+    border-radius: 100px;
+  }
+  

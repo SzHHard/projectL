@@ -1,0 +1,21 @@
+  .hovered {
+    background-color: grey;
+    cursor: pointer;
+  }
+  
+  .notHovered {
+      
+  }
+
+  .navItem {
+    width: 100px;
+  }
+
+
+  .link {
+      text-decoration: none;
+      color: black;
+  }
+  .active {
+    color: #ffb800;
+  }

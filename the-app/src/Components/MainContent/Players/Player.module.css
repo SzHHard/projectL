@@ -1,0 +1,50 @@
+.playerInstance {
+    /* width: 80%;
+    margin: 0 auto;
+    border: 2px dotted blanchedalmond; */
+    
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-rows: 5fr 2fr;
+    width: 98%;
+    height: 95%;
+    margin: 0 auto;
+    margin-top: 2px;
+    /* grid-template-areas: 
+    'pr mi mi mi mi mi mi mi ri'
+    'cat cat cat cat cat cat cat cat cat cat'; */
+}
+.profileImageContainer {
+    height: 100%;
+    background-color: cornsilk;
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+.mainInfoContainer {
+    height: 100%;
+    background-color:lightcyan;
+    grid-column-start: 2;
+}
+
+.rankIconContainer {
+    grid-column-start: 3;
+    background-color: lightyellow;
+    /* grid-area: ri; */
+}
+
+.categoriesContainer {
+    background-color: lightgoldenrodyellow;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+}
+
+.wrapper {
+    
+    width: 80%;
+    height: 100px;
+    margin: 10px auto;
+    border-radius: 15px;
+    border: 2px dotted blanchedalmond;
+
+}

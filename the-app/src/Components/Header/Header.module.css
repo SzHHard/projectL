@@ -1,0 +1,8 @@
+.header {
+    grid-area: header;
+    height: 40px;
+    background-color: #f3bf9a;
+    display: flex;
+    justify-content: space-between;
+    }
+  

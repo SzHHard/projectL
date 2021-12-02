@@ -1,0 +1,11 @@
+.switch {
+    height: 40px;
+    width: 120px;
+}
+.active {
+    color:rgb(192, 2, 106);
+}
+
+.link {
+    color: black;
+}

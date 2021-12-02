@@ -1,0 +1,12 @@
+.searchBar {
+    align-self: center;
+    min-width: 200px;
+    height: 90%;
+  }
+  
+  .searchBar input {
+      height: 80%;
+      width: 95%;
+      border-radius: 7px;
+      border-color: #f3bf9a;
+  }
