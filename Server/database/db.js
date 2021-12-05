@@ -2,12 +2,13 @@ const sqlite3 = require('sqlite3');
 
 const db = new sqlite3.Database('./db.sqlite');
 
-const createUsersTable = () => {
-    db.run('CREATE TABLE users (id INTEGER PRIMARY KEY, nickName TEXT NOT NULL, profileImg TEXT, status TEXT NOT NULL)');
-}
+
+
+
+
 
 const createPlayerСardsTable = () => {
-    db.run('CREATE TABLE playerСards (id INTEGER PRIMARY KEY, userId, briefInfo TEXT, fullInfo TEXT, rank TEXT, category1 TEXT, FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE)');
+    db.run('CREATE TABLE IF NOT EXISTS playerСards (id INTEGER PRIMARY KEY, userId, briefInfo TEXT, fullInfo TEXT, rank TEXT, category1 TEXT, FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE)');
 }
 
 
@@ -20,9 +21,9 @@ const insertPlayerCard = (user_id, briefInfo, fullInfo, rank, category1) => {
         $val4: rank,
         $val5: category1,
     },
-    function (error) {
+    function (err) {
         if(error) {
-            console.log(error);
+            console.log(err);
             return;
           }
         console.log(this.lastID); //выводит последнее id 
@@ -36,12 +37,45 @@ const fetchPlayerCards = () => {
     })
 }
 
+// // // 
+
+const createUsersTable = () => {
+    db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, nickName TEXT NOT NULL, profileImg TEXT, status TEXT, login TEXT UNIQUE NOT NULL, password TEXT NOT NULL)');
+}
+
+const registerUser = (nickName, login, password) => {
+    db.run(`INSERT INTO users (nickName, login, password) VALUES($val1, $val2, $val3)`,
+    {
+        $val1: nickName,
+        $val2: login,
+        $val3: password
+    },
+    function (err)  {
+        if(err) {
+            console.log('myErr: ' + err);
+            return;
+        }
+        return this.lastID;
+    })
+}
+
+const findUserByLogin = (login, callback) => {
+    db.get(`SELECT * FROM users WHERE login = $val1`, {
+        $val1: login,
+    }, 
+   (err, row) => {
+       callback(err, row);
+   })
+}
+
 
 const dbInteraction = {
     createUsersTable,
     createPlayerСardsTable,
     insertPlayerCard,
     fetchPlayerCards,
+    findUserByLogin,
+    registerUser,
 }
 
 module.exports = dbInteraction;
