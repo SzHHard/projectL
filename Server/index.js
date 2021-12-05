@@ -4,24 +4,30 @@ const playerCardsRouter = require("./CardsRouters/playerCardsRouter.js");
 const authRouter = require("./Auth/authRouter");
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const errorMiddleware = require('./middlewares/error-middleware');
+const authMiddleware = require('./middlewares/auth-middleware');
 
 const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 3001; // doesn't work for some reason
 const app = express();
 
-const dbInteraction = require('./database/db');
+// const dbInteraction = require('./database/db');
 
 app.use(express.json());
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(cors());
-
 
 
 app.use("/api/players", playerCardsRouter);
 app.use("/api/auth", authRouter);
 
+app.use(errorMiddleware); // всегда должен идти последним
+
 app.get("/api", (req, res) => {
+    res.json({ message: "Hello from server!!!" });
+  });
+  app.get("/", (req, res) => {
     res.json({ message: "Hello from server!!!" });
   });
 

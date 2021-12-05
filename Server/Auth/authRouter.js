@@ -1,19 +1,19 @@
 const express = require("express");
 const UserController = require('./user-auth-controller')
-const {check} = require('express-validator')
+const { check, body } = require('express-validator')
+const authMiddleware = require('../middlewares/auth-middleware');
 
 const authRouter = express.Router();
 
-authRouter.post('/registration', [ 
-    check('nickName', 'Имя пользователя не может быть пустым').notEmpty(),
-    check('login', "Логин не может быть меньше четырех символов").isLength({min: 4}),
-    check('password', "Пароль должен быть больше четырех символов").isLength({min: 4})
-])
-authRouter.post('/registration', UserController.registration)
+authRouter.post('/registration',
+    body('email').isEmail(),
+    body('password').isLength({min:4, max: 32}),
+    UserController.registration)
+
 authRouter.post('/login', UserController.login)
-authRouter.post('/logout', UserController.logout)
+authRouter.delete('/logout', UserController.logout)
 
 authRouter.get('/refresh', UserController.refresh)
-authRouter.get('/users', UserController.getUsers)
+authRouter.get('/users', authMiddleware, UserController.getUsers)
 
 module.exports = authRouter;

@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
 const { secret } = require('./config');
 const jwt = require('jsonwebtoken');
-const userService = require('../service/user-service');
+const UserService = require('../service/user-service');
+const ApiError = require('../exceptions/api-error')
 
 // const generateAccessToken = (id) => {
 //     const payload = {
@@ -14,95 +15,65 @@ const userService = require('../service/user-service');
 
 const UserController = {
 
-    async registration(req, res) {
+    async registration(req, res, next) {
 
 
         try {
-            const {email, password} = req.body;
-            const userData = await userService.registration(email, password);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true}) //если https, добавить secure: true
+            const errors = validationResult(req);
+            if(!errors.isEmpty()){
+                return next(ApiError.BadRequest('Ошибка при валидации', errors.array())) 
+            }
+            const { email, password } = req.body;
+            const userData = await UserService.registration(email, password);
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true }) //если https, добавить secure: true
             return res.json(userData);
         } catch (err) {
-            console.log(err);
-        }
-
-
-        // const errors = validationResult(req);
-        // if (!errors.isEmpty()) {
-        //     return res.status(400).json({ message: "ошибка при регистрации", errors });
-        // }
-
-        // const { nickName, login, password } = req.body;
-        // dbInteraction.findUserByLogin(login, (err, row) => {
-
-        //     if (err) {
-        //         console.log(err);
-        //         return;
-        //     }
-
-        //     let candidate = row;
-
-        //     if (candidate) {
-        //         res.status(400).json({ error: 'user with this login alreadt exists' })
-        //         return;
-        //     } else {
-        //         const hashedPassword = bcrypt.hashSync(password, 8);
-        //         const newUserId = dbInteraction.registerUser(nickName, login, hashedPassword);
-        //         console.log('newUserId: ' + newUserId);  // обработать асинхронность когда будет нужно.
-        //         res.json({ message: `Пользователь с id = ${newUserId} успешно зарегистрирован` })
-        //     }
-
-        // });
-
-
-
-    },
-
-
-    async login(req, res) {
-        // const { login, password } = req.body
-        // dbInteraction.findUserByLogin(login, (err, user) => {
-        //     if (err) {
-        //         console.log(err);
-        //     }
-
-        //     const isValid = bcrypt.compareSync(password, user.password);
-        //     if (!isValid || !user) {
-        //         return res.status(400).json({ message: `Пользователь не найден` });
-        //     } else {
-        //         const token = generateAccessToken(user.id)
-        //         return res.json({token})
-        //     }
-        // })
-
-        try {
-
-        } catch (err) {
-
+            next(err)
         }
 
     },
-    async logout(req, res) {
-        try {
-            res.json("works")
-        } catch (err) {
 
+
+    async login(req, res, next) {
+        try {
+            const {email, password} = req.body;
+            const userData = await UserService.login(email, password);
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true }) //если https, добавить secure: true
+            return res.json(userData);
+
+        } catch (err) {
+            next(err)
+        }
+
+    },
+    async logout(req, res, next) {
+        try {
+            const {refreshToken} = req.cookies;
+            await UserService.logout(refreshToken);
+            res.clearCookie('refreshToken')
+            return res.status(204).send() // можно просто код 200
+        } catch (err) {
+            next(err)
         }
     },
 
-    async getUsers(req, res) {
+    async getUsers(req, res, next) {
         try {
-            res.json("works")
+           const users = await UserService.getAllUsers();
+           return res.json(users)
         } catch (err) {
-
+            next(err)
         }
     },
 
-    async refresh(req, res) {
+    async refresh(req, res, next) {
         try {
-            res.json("works")
+            const {refreshToken} = req.cookies;
+            const userData = await UserService.refresh(refreshToken);
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true }) //если https, добавить secure: true
+            return res.json(userData);
         } catch (err) {
-
+            next(err)
         }
     },
 
