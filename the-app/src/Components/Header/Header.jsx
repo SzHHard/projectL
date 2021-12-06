@@ -4,6 +4,7 @@ import Search from './Search'
 import Logo from './LogoToMainpage'
 import ProfileImg from './ProfileImg'
 import StylesHeader from './Header.module.css'
+import RegisterLogin from './RegisterLogin'
 
  export class Header extends React.Component {
 
@@ -14,6 +15,7 @@ import StylesHeader from './Header.module.css'
                 <Logo />
                 <GamesSelect />
                 <Search /> 
+                <RegisterLogin />
                 <ProfileImg />
             </header>
         )

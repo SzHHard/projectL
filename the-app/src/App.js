@@ -8,6 +8,7 @@ import DogsComponent from './Components/MainContent/Dogs.jsx'
 import Create from './Components/MainContent/Create/Create'
 import MainPanel from './Components/MainContent/AboutAndAd.jsx'
 import Success from './Components/MainContent/SuccessCreatedPlayerCard'
+import RegistrationForm from './Components/MainContent/RegistrationForm'
 
 import './App.css'
 import CreatePlayerContainer from './Components/MainContent/Create/PlayerTeamSwitch/CreatePlayerContainer.jsx'
@@ -35,6 +36,7 @@ class App extends React.Component {
             <Routes>
               <Route path='/' >
                 <Route index path='home' element ={<MainPanel />} />
+                <Route path='registration' element={<RegistrationForm />} />
                 <Route path='players' element={<PlayersComponent Players={this.props.state.Players} />} />
                 <Route path='teams' element={<TeamsComponent Teams={this.props.state.Teams} />} />
                 <Route path='dogs' element={<DogsComponent />} />

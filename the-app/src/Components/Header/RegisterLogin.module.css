@@ -1,0 +1,12 @@
+.registerLogin{
+    height: 95%;
+    align-self: center;
+    display: flex;
+}
+.thumb{
+    height: 80%;
+    width: 80px;
+    align-self: center;
+    
+
+}
