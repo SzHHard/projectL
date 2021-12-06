@@ -10,9 +10,9 @@ class DogsComponent extends React.Component {
 
         return (
             <div className = {stylesDogs.dogsComponent}> 
-                <img className = {stylesDogs.dogInstance} src = {dog1} />
-                <img className = {stylesDogs.dogInstance} src = {dog2} />
-                <img className = {stylesDogs.dogInstance} src = {dog3} />
+                <img alt={'dog1'} className = {stylesDogs.dogInstance} src = {dog1} />
+                <img alt={'dog2'} className = {stylesDogs.dogInstance} src = {dog2} />
+                <img alt={'dog3'} className = {stylesDogs.dogInstance} src = {dog3} />
             </div>
         )
     }

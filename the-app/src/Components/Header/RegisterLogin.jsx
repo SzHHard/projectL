@@ -1,31 +1,41 @@
 import React from 'react';
-import styles from './RegisterLogin.module.css' 
-import {createUserTC} from '../../State/CurrentUserReducer';
-import { connect } from "react-redux";
-import {NavLink} from 'react-router-dom';
+import styles from './RegisterLogin.module.css'
+import { connect } from 'react-redux';
+import { logoutUserTC } from '../../State/CurrentUserReducer';
+import { NavLink } from 'react-router-dom';
 
 class RegisterLogin extends React.Component {
 
     constructor(props) {
         super(props);
+        this.handleLogoutClick = this.handleLogoutClick.bind(this)
+    }
+    handleLogoutClick() {
+        this.props.logoutUserTC()
     }
 
     render() {
-
         return (
-            <div className={styles.registerLogin}>
-                <button className={styles.thumb}> Login </button>
-                <NavLink to={`/registration`}> <button className={styles.thumb}> Sign up </button> </NavLink>
-            </div>
+            this.props.isLoggedIn ?
+                <div>
+                    <button onClick={this.handleLogoutClick} className={styles.thumb}> Logout </button> 
+                </div>
+                : <div className={styles.registerLogin}>
+                    <NavLink to={`/login`}><button className={styles.thumb}> Login </button> </NavLink>
+                    <NavLink to={`/registration`}> <button className={styles.thumb}> Sign up </button> </NavLink>
+                </div>
+
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-
+        isLoggedIn: state.CurrentUserInfo.isLoggedIn,
     }
+
 }
 
-export default RegisterLogin;
-// export default connect(mapStateToProps, {createUserTC})(RegisterLogin);
+
+export default connect(mapStateToProps, {logoutUserTC})(RegisterLogin);
+

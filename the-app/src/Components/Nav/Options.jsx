@@ -2,7 +2,6 @@ import React from 'react'
 //import NavPlayers from './Players'
 //import NavTeams from './Teams'
 import NavItem from './NavItemClassForInheritance'
-import { NavLink } from 'react-router-dom'
 import stylesOptions from './Options.module.css'
 
 class Options extends React.Component {
@@ -39,6 +38,10 @@ class Options extends React.Component {
 
                 <NavItem apiAddress='/dogs'>
                     Dogs
+                </NavItem>
+
+                <NavItem apiAddress='/users'>
+                    Users
                 </NavItem>
 
                 <NavItem apiAddress='/create'>

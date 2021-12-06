@@ -21,7 +21,6 @@ const teamsReducer = (state = initialState, action) => {
     }
 }
 export const addATeamAC = (card) => {
-    debugger
     return { type: addATeam, team: card }
 }
 

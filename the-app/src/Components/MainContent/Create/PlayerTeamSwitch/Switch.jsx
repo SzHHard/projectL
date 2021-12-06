@@ -6,10 +6,6 @@ import {NavLink} from 'react-router-dom'
 
 class Switch extends React.Component {
 
-    constructor(props) {
-        super(props)
-    }
-
     render() {
 
         return (

@@ -6,7 +6,7 @@ class ProfileImg extends React.Component {
     render() {
         return (
             <div className = {StylesProfileImg.profileImg}>
-                <img src={szh}/>
+                <img alt={'profileImg'} src={szh}/>
             </div>
         )
     }

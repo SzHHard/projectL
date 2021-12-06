@@ -1,0 +1,19 @@
+.inputField {
+    margin-top: 15px;
+
+    
+
+}
+.inputField input {
+    height: 20px;
+    
+
+}
+.error input {
+    border: 2px solid rgb(219, 54, 137);
+}
+
+
+ .error span {
+    color: rgb(77, 34, 34);
+}

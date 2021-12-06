@@ -26,7 +26,6 @@ class TeamForm extends React.Component {
     handleCreateTeam() {
         let newTeamCard = { rankIcon: this.state.locationText, teamLogo: this.state.aim, mainInfo: this.state.locationText, categories: this.state.categories }
         console.log(newTeamCard)
-        debugger
         this.props.handleSubmit(newTeamCard);
     }
 

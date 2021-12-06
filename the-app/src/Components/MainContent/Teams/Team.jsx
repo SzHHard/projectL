@@ -3,9 +3,7 @@ import stylesPlayer from './Team.module.css'
 
 class Team extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
+
 
     render() {
         

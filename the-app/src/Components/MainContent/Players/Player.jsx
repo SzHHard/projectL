@@ -3,10 +3,6 @@ import stylesPlayer from './Player.module.css'
 
 class Player extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         
         let categoriesString = '' 

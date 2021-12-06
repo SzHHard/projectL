@@ -1,15 +1,15 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {createUserTC} from '../../State/CurrentUserReducer'
+import {loginUserTC} from '../../State/CurrentUserReducer'
 import { connect } from "react-redux";
 import { email, maxLengthCreator, minLengthCreator, required } from '../../utils/fieldValidation';
 import { Input } from '../../utils/formFields';
-
+import {Navigate} from 'react-router-dom';
 
 const maxLength32 = maxLengthCreator(32);
 const minLength4 = minLengthCreator(4);
 
-class RegistrationForm extends React.Component {
+class LoginForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -18,20 +18,17 @@ class RegistrationForm extends React.Component {
     }
 
     submit(values) {
-        this.props.createUserTC(values.email, values.password);
+        this.props.loginUserTC(values.email, values.password);
+
     }
 
     render() {
-
-        return (
+        
+        const isLoggedIn = this.props.isLoggedIn;
+        console.log(isLoggedIn)
+        return  isLoggedIn ? <Navigate to='/home' replace={true} />  //works but doesn't redirect right after submitting
+        : (
             <form onSubmit={this.props.handleSubmit(this.submit)}>
-                <div>
-                    {/* <label htmlFor="firstName"> </label> */}
-                    <Field name="firstName" label = 'First Name: ' component={Input} type="text" />
-                </div>
-                <div>
-                    <Field name="secondName" label = 'Second Name: 'component={Input} type="text" />
-                </div>
                 <div>
                     <Field name="email" label = 'Email: ' component={Input} type="text"
                     validate = {[required, email]} />
@@ -42,7 +39,7 @@ class RegistrationForm extends React.Component {
                 </div>
                 <div>
                     <button type="submit">
-                        Submit
+                        Sign in
                     </button>
                 </div>
             </form>
@@ -52,17 +49,16 @@ class RegistrationForm extends React.Component {
 
 
 
-RegistrationForm = reduxForm({
-    form: 'registration'
-})(RegistrationForm);
+LoginForm = reduxForm({
+    form: 'login'
+})(LoginForm);
 
 const mapStateToProps = (state) => {
     return {
-
+        isLoggedIn: state.CurrentUserInfo.isLoggedIn,
     }
 }
 
 
-export default connect(mapStateToProps, {createUserTC})(RegistrationForm);
-
+export default connect(mapStateToProps, {loginUserTC})(LoginForm);
 

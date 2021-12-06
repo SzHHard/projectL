@@ -14,6 +14,6 @@ authRouter.post('/login', UserController.login)
 authRouter.delete('/logout', UserController.logout)
 
 authRouter.get('/refresh', UserController.refresh)
-authRouter.get('/users', authMiddleware, UserController.getUsers)
+authRouter.get('/users', /*authMiddleware , */ UserController.getUsers)
 
 module.exports = authRouter;

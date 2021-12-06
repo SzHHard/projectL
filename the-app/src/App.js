@@ -9,19 +9,16 @@ import Create from './Components/MainContent/Create/Create'
 import MainPanel from './Components/MainContent/AboutAndAd.jsx'
 import Success from './Components/MainContent/SuccessCreatedPlayerCard'
 import RegistrationForm from './Components/MainContent/RegistrationForm'
-
+import LoginFormContainer from './Components/MainContent/LoginForm.jsx'
+import store from './State/reduxStore';
 import './App.css'
 import CreatePlayerContainer from './Components/MainContent/Create/PlayerTeamSwitch/CreatePlayerContainer.jsx'
 import CreateTeamContainer from './Components/MainContent/Create/PlayerTeamSwitch/CreateTeamContainer.jsx'
+import AllUsers from './Components/MainContent/Users/AllUsers.jsx'
 
 
 
 class App extends React.Component {
-
-  constructor(props) {
-    super(props)
-  }
-
 
   render() {
 
@@ -37,9 +34,11 @@ class App extends React.Component {
               <Route path='/' >
                 <Route index path='home' element ={<MainPanel />} />
                 <Route path='registration' element={<RegistrationForm />} />
+                <Route path='login' element={<LoginFormContainer />} />
                 <Route path='players' element={<PlayersComponent Players={this.props.state.Players} />} />
                 <Route path='teams' element={<TeamsComponent Teams={this.props.state.Teams} />} />
                 <Route path='dogs' element={<DogsComponent />} />
+                <Route path='users' element={<AllUsers dispatch = {store.dispatch.bind(store)}/>} />
                 <Route path='create' element={<Create />} />
                 <Route path='create/:prefferedCard' element={<Create />} />
                 <Route path='/create/PlayerCard' element={<CreatePlayerContainer />} />
