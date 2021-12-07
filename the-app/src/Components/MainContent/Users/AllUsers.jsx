@@ -1,40 +1,44 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {fetchUsersTC} from '../../../State/usersReducer'
+import { connect } from 'react-redux';
+import { fetchUsersTC } from '../../../State/usersReducer'
+import Pagination from './Pagination';
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from 'react';
 
-class AllUsers extends React.Component {
+const AllUsers = (props) => {
+
+    let [searchParams, setSearchParams] = useSearchParams(1);
+      
+    useEffect(() => {
+       
+        console.log(props, searchParams.get('page'))
+        const amountOnAPage = 4;
+        const currentPage = parseInt(searchParams.get('page'));
+        debugger;
+        fetchUsersTC(amountOnAPage, (currentPage || 1))(props.dispatch)
+    }, [searchParams.get('page')])
 
 
-    constructor(props) {
-        super(props)
+    return (
+        <div>
+            {props.users.map((user) => {
+                return <div key={user._id}> {user.email} </div>
+            })}
 
-        // this.handleLoad = this.handleLoad.bind(this);
-    }
+            <Pagination pagesAmount={props.pagesAmount} />
 
-    componentDidMount() {
-        fetchUsersTC()(this.props.dispatch)
-    }
-
-    
-
-    render() {
-        return (
-            <div> 
-                {this.props.users.map((user) => {
-                   return <div> {user.email} </div>
-                })}
-            </div>
-        )
-    }
+        </div>
+    )
 }
-
 const mapStateToProps = (state) => {
     return {
-        users: state.Users
+        users: state.Users.usersArr,
+        totalUsers: state.Users.totalUsers,
+        pagesAmount: state.Users.pagesAmount,
     }
 }
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
     return {
         fetchUsersTC,
     }
