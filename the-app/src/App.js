@@ -23,8 +23,8 @@ class App extends React.Component {
 
 
 componentDidMount() {
-  this.props.checkAuthTC()
-  console.log(this.props.state) // здесь всё еще нормально
+  this.props.checkAuthTC() // думаю, это надо переработать
+
 }
 
   render() {
@@ -66,7 +66,7 @@ componentDidMount() {
 
 const mapStateToProps = (state) => {
   return {
-    state:state, // потом убрать
+  
   }
 }
 

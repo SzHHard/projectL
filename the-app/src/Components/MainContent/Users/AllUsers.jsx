@@ -11,7 +11,6 @@ const AllUsers = (props) => {
       
     useEffect(() => {
        
-        console.log(props, searchParams.get('page'))
         const amountOnAPage = 4;
         const currentPage = parseInt(searchParams.get('page'));
         debugger;

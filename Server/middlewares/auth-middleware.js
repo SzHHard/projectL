@@ -4,6 +4,7 @@ const TokenService = require('../service/token-service')
 module.exports = function (req, res, next) {
     try {
         const authorizationHeader = req.headers.authorization;
+        console.log(authorizationHeader);
         if(!authorizationHeader) {
             return next(ApiError.UnauthoruzedError());
         }
