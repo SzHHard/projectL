@@ -1,8 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { fetchUsersTC } from '../../../State/usersReducer'
+import styles from './Pagination.module.css';
 
-import { NavLink } from 'react-router-dom';
 import { useSearchParams } from "react-router-dom";
 
 const Pagination = (props) => {
@@ -20,13 +18,13 @@ const Pagination = (props) => {
             return setSearchParams({ page: pageNumber })
         }
     }
-
+   
     return (
         <div>
 
             {
                 numbersArray.map((number) => {
-                    return <span onClick={gotoPageCreator(number)}>  {number}  </span>
+                    return <span className={styles.pointer + ' ' + ( number == searchParams.get('page') ? styles.active : '')} onClick={gotoPageCreator(number)}>  {number}  </span>
                 })
             }
 

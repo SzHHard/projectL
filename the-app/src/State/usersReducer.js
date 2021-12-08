@@ -20,10 +20,11 @@ const usersReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case putAllUsersIntoState:
+        
             // state.usersArr = action.users;  //  внизу return state 
 
             state.pagesAmount = Math.ceil(action.totalUsersInDb / action.amountOnAPage)
-            return {...state, usersArr: action.users}  // в чем разница с закоментированной строкой?
+            return { ...state, usersArr: action.users }  // в чем разница с закоментированной строкой?
         case getAllUsers:
 
 
@@ -46,7 +47,7 @@ export const fetchUsersTC = (amountOnAPage, page) => {
                 page
             }
         }).then((res) => {
-           
+
             dispatch(putAllUsersIntoStateAC(res.data.users, res.data.totalUsersInDb, amountOnAPage))
         }).catch((err) => {
             console.log(err)
