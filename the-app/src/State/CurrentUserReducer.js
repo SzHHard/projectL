@@ -5,7 +5,7 @@ const deleteInfoAfterLoggingOut = 'DELETE-INFO-AFTER-LOGGING-OUT'
 
 const instance = axios.create({
     baseURL: 'http://localhost:3001/api/auth',
-    withInfoAfterRegistration: true,
+    withCredentials: true,
 })
 
 const initialState = { isLoggedIn: false, accessToken: null };
@@ -26,11 +26,11 @@ const currentUserReducer = (state = initialState, action) => {
 }
 
 export const checkAuthTC = () => (dispatch) => {
+    console.log(document.cookie);
     instance.get('/refresh').then((res) => {
-        console.log(res);
         const accessToken = res.data.accessToken;
         if(accessToken) {
-            dispatch(addInfoAfterRegistration(res.data.user.email, res.data.accessToken))  //ПОМЕНЯТЬ Registration на Authentication ВО ВСЕМ ФАЙЛЕ и deps..
+            dispatch(addInfoAfterRegistrationAC(res.data.user.email, res.data.accessToken))  //ПОМЕНЯТЬ Registration на Authentication ВО ВСЕМ ФАЙЛЕ и deps..
         } else {
             console.log('you don\'t have an access token');
         }
@@ -47,7 +47,6 @@ export const createUserTC = (email, password) => {
             console.log(res);
             dispatch(addInfoAfterRegistrationAC(res.data.user.email, res.data.accessToken))
         }).catch((err) => {
-    
             console.log(err)
         })
     }
