@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const addInfoAfterRegistration = 'ADD-INFO-AFTER-REGISTRATION'
+const addInfoAfterAuthentication = 'ADD-INFO-AFTER-AUTHENTICATION'
 const deleteInfoAfterLoggingOut = 'DELETE-INFO-AFTER-LOGGING-OUT'
 
 const instance = axios.create({
@@ -13,11 +13,12 @@ const initialState = { isLoggedIn: false, accessToken: null };
 const currentUserReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case addInfoAfterRegistration:
-            state.email = action.email;
-            state.accessToken = action.accessToken;
-            state.isLoggedIn = true;
-            return state;
+        case addInfoAfterAuthentication:
+            // state.email = action.email;
+            // state.accessToken = action.accessToken;
+            // state.isLoggedIn = true;
+            debugger;
+            return {email: action.email, accessToken: action.accessToken, isLoggedIn: true, };
         case deleteInfoAfterLoggingOut:
             state = {isLoggedIn: false}
             return state;
@@ -26,11 +27,10 @@ const currentUserReducer = (state = initialState, action) => {
 }
 
 export const checkAuthTC = () => (dispatch) => {
-    console.log(document.cookie);
     instance.get('/refresh').then((res) => {
         const accessToken = res.data.accessToken;
         if(accessToken) {
-            dispatch(addInfoAfterRegistrationAC(res.data.user.email, res.data.accessToken))  //ПОМЕНЯТЬ Registration на Authentication ВО ВСЕМ ФАЙЛЕ и deps..
+            dispatch(addInfoAfterAuthenticationAC(res.data.user.email, res.data.accessToken))  
         } else {
             console.log('you don\'t have an access token');
         }
@@ -45,7 +45,7 @@ export const createUserTC = (email, password) => {
     return (dispatch) => {
         instance.post('/registration', { email, password }).then((res) => {
             console.log(res);
-            dispatch(addInfoAfterRegistrationAC(res.data.user.email, res.data.accessToken))
+            dispatch(addInfoAfterAuthenticationAC(res.data.user.email, res.data.accessToken))
         }).catch((err) => {
             console.log(err)
         })
@@ -56,7 +56,7 @@ export const loginUserTC = (email, password) => {
     return (dispatch) => {
         instance.post('/login', { email, password }).then((res) => {
             console.log(res);
-            dispatch(addInfoAfterRegistrationAC(res.data.user.email, res.data.accessToken))
+            dispatch(addInfoAfterAuthenticationAC(res.data.user.email, res.data.accessToken))
         }).catch((err) => {
             console.log(err)
         })
@@ -76,9 +76,9 @@ export const logoutUserTC = () => (dispatch) => {
 
 
 
-const addInfoAfterRegistrationAC = (email, accessToken) => {
+const addInfoAfterAuthenticationAC = (email, accessToken) => {
     return {
-        type: addInfoAfterRegistration, email, accessToken
+        type: addInfoAfterAuthentication, email, accessToken
     }
 }
 const deleteInfoAfterLoggingOutAC = () => {
