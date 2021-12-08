@@ -15,10 +15,16 @@ import './App.css'
 import CreatePlayerContainer from './Components/MainContent/Create/PlayerTeamSwitch/CreatePlayerContainer.jsx'
 import CreateTeamContainer from './Components/MainContent/Create/PlayerTeamSwitch/CreateTeamContainer.jsx'
 import AllUsers from './Components/MainContent/Users/AllUsers.jsx'
-
+import { connect } from 'react-redux'
+import {checkAuthTC} from './State/CurrentUserReducer';
 
 
 class App extends React.Component {
+
+
+componentDidMount() {
+  this.props.checkAuthTC()
+}
 
   render() {
 
@@ -57,4 +63,13 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+
+  }
+}
+
+
+
+
+export default connect(mapStateToProps, {checkAuthTC})(App);

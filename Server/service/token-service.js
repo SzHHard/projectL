@@ -47,8 +47,8 @@ const TokenService = {
         }
     },
     async findToken(refreshToken) {
-        await tokenModel.findOne({refreshToken})
-        return;
+        const token = await tokenModel.findOne({refreshToken})
+        return token;
 
     },
 

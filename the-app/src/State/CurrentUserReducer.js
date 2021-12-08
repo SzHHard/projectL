@@ -8,7 +8,7 @@ const instance = axios.create({
     withInfoAfterRegistration: true,
 })
 
-const initialState = { isLoggedIn: false };
+const initialState = { isLoggedIn: false, accessToken: null };
 
 const currentUserReducer = (state = initialState, action) => {
 
@@ -25,6 +25,21 @@ const currentUserReducer = (state = initialState, action) => {
     }
 }
 
+export const checkAuthTC = () => (dispatch) => {
+    instance.get('/refresh').then((res) => {
+        console.log(res);
+        const accessToken = res.data.accessToken;
+        if(accessToken) {
+            dispatch(addInfoAfterRegistration(res.data.user.email, res.data.accessToken))  //ПОМЕНЯТЬ Registration на Authentication ВО ВСЕМ ФАЙЛЕ и deps..
+        } else {
+            console.log('you don\'t have an access token');
+        }
+    })
+        .catch((err) => {
+            console.log(err);
+        })
+    
+}
 
 export const createUserTC = (email, password) => {
     return (dispatch) => {
@@ -32,7 +47,7 @@ export const createUserTC = (email, password) => {
             console.log(res);
             dispatch(addInfoAfterRegistrationAC(res.data.user.email, res.data.accessToken))
         }).catch((err) => {
-            debugger;
+    
             console.log(err)
         })
     }
