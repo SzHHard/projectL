@@ -14,7 +14,7 @@ const AllUsers = (props) => {
         const amountOnAPage = 4;
         const currentPage = parseInt(searchParams.get('page'));
         debugger;
-        fetchUsersTC(amountOnAPage, (currentPage || 1))(props.dispatch)
+        props.fetchUsersTC(amountOnAPage, (currentPage || 1))
     }, [searchParams.get('page')])
 
 
@@ -43,4 +43,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllUsers)
+export default connect(mapStateToProps, {fetchUsersTC})(AllUsers)

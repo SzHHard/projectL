@@ -45,7 +45,7 @@ componentDidMount() {
                 <Route path='players' element={<PlayersComponent Players={this.props.state.Players} />} />
                 <Route path='teams' element={<TeamsComponent Teams={this.props.state.Teams} />} />
                 <Route path='dogs' element={<DogsComponent />} />
-                <Route path='users' element={<AllUsers dispatch = {store.dispatch.bind(store)}/>} />
+                <Route path='users' element={<AllUsers />} />
                 <Route path='create' element={<Create />} />
                 <Route path='create/:prefferedCard' element={<Create />} />
                 <Route path='/create/PlayerCard' element={<CreatePlayerContainer />} />
