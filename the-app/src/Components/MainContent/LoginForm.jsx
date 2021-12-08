@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
         
         const isLoggedIn = this.props.isLoggedIn;
         console.log(isLoggedIn)
-        return  isLoggedIn ? <Navigate to='/home' replace={true} />  //works but doesn't redirect right after submitting
+        return  isLoggedIn ? <Navigate to='/home' replace={true} /> 
         : (
             <form onSubmit={this.props.handleSubmit(this.submit)}>
                 <div>

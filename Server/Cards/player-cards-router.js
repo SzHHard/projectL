@@ -1,5 +1,5 @@
 const express = require('express');
-
+const PlayerCardsController = require('./player-cards-controller');
 
 let players = [ 
 { profileImg: 'img1', mainInfo: 'textHere', rankIcon: 'iron4', categories: ['cat1', 'cat2'] },
@@ -8,7 +8,7 @@ let players = [
 { profileImg: 'img4', mainInfo: 'textHere4', rankIcon: 'silver2', categories: ['cat1', 'cat2'] },
 { profileImg: 'img5', mainInfo: 'textHere5', rankIcon: 'gold4', categories: ['cat1', 'cat2'] },
 { profileImg: 'img6', mainInfo: 'textHere6', rankIcon: 'diamon1', categories: ['cat1', 'cat2', 'cat9'] },
-{ profileImg: 'img7', mainInfo: 'textHereHi', rankIcon: 'master+', categories: ['cat1', 'cat2', 'cat3', 'cat4'] }, ]  // временный массив
+{ profileImg: 'img7', mainInfo: 'textHereHi', rankIcon: 'master+', categories: ['cat1', 'cat2', 'cat3', 'cat4'] },]  // временный массив
 
 
 
@@ -16,10 +16,8 @@ let players = [
 playerCardsRouter = express.Router();
 
 
- 
+playerCardsRouter.post('/playerCards', PlayerCardsController.creatingCard);
 
-playerCardsRouter.get('/', (req, res, next) => {
-    res.json(players);
-})
+playerCardsRouter.get('/playerCards', PlayerCardsController.getCards);
 
 module.exports = playerCardsRouter;

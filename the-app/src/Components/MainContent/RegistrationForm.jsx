@@ -4,6 +4,7 @@ import {createUserTC} from '../../State/CurrentUserReducer'
 import { connect } from "react-redux";
 import { email, maxLengthCreator, minLengthCreator, required } from '../../utils/fieldValidation';
 import { Input } from '../../utils/formFields';
+import {Navigate} from 'react-router-dom';
 
 
 const maxLength32 = maxLengthCreator(32);
@@ -22,8 +23,9 @@ class RegistrationForm extends React.Component {
     }
 
     render() {
-
-        return (
+        const isLoggedIn = this.props.isLoggedIn;
+        return isLoggedIn ? <Navigate to='/home' replace={true} /> 
+        :(
             <form onSubmit={this.props.handleSubmit(this.submit)}>
                 <div>
                     {/* <label htmlFor="firstName"> </label> */}
@@ -58,7 +60,7 @@ RegistrationForm = reduxForm({
 
 const mapStateToProps = (state) => {
     return {
-
+        isLoggedIn: state.CurrentUserInfo.isLoggedIn,
     }
 }
 

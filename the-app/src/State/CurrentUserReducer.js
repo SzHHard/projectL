@@ -30,6 +30,7 @@ export const checkAuthTC = () => (dispatch) => {
     instance.get('/refresh').then((res) => {
         const accessToken = res.data.accessToken;
         if(accessToken) {
+            debugger;
             dispatch(addInfoAfterAuthenticationAC(res.data.user.email, res.data.accessToken))  
         } else {
             console.log('you don\'t have an access token');
