@@ -21,9 +21,10 @@ const PlayerCardsController = {
             const cards = await PlayerCardService.getAllCards();
             //
            
-            if (req.query.amountOnPage && req.query.page) {
+            if (req.query.amountOnAPage && req.query.page) {
+                //amountOnAPage=1&page=1
                 const totalCards = cards.length;
-                const amountOnAPage = req.query.amountOnPage;
+                const amountOnAPage = req.query.amountOnAPage;
                 const page = req.query.page;
 
                 cardsOnCurrentPage = cards.filter((card, index) => {

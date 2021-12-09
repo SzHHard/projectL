@@ -5,7 +5,7 @@ const addACard = 'ADD-A-CARD';
 const putAllCardsIntoState = 'PUT-ALL-CARDS-INTO-STATE';
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3001/cards/',
+    baseURL: 'http://localhost:3001/api/cards/',
     withInfoAfterRegistration: true,
 })
 
@@ -13,33 +13,52 @@ const instance = axios.create({
 
 
 const initialState = {
-    playerCards: [
-        { profileImg: 'img1', mainInfo: 'textHere', rankIcon: 'iron4', categories: ['cat1', 'cat2'] },
-        { profileImg: 'img2', mainInfo: 'textHere2', rankIcon: 'iron1', categories: ['cat1', 'cat2', 'cat3'] },
-        { profileImg: 'img3', mainInfo: 'textHere3', rankIcon: 'bronze4', categories: ['cat1', 'cat2', 'cat3'] },
-        { profileImg: 'img4', mainInfo: 'textHere4', rankIcon: 'silver2', categories: ['cat1', 'cat2'] },
-        { profileImg: 'img5', mainInfo: 'textHere5', rankIcon: 'gold4', categories: ['cat1', 'cat2'] },
-        { profileImg: 'img6', mainInfo: 'textHere6', rankIcon: 'diamon1', categories: ['cat1', 'cat2', 'cat9'] },
-        { profileImg: 'img7', mainInfo: 'textHereHi', rankIcon: 'master+', categories: ['cat1', 'cat2', 'cat3', 'cat4'] },
+    cardsArr: [
+        {
+            profileUrl: 'url',
+            nickName: 'szh',
+            briefInfo: 'brief Info Here',
+            fullInfo: 'full info here',
+            rank: 'diamond24',
+            sex: 'male',
+            mainRoles: ['jungler'],
+            offRoles: ['mid'],
+            categories: ['cat1', 'cat2']
+        },
+        {
+            profileUrl: 'url2',
+            nickName: 'szh2',
+            briefInfo: 'briefdsadsadasdas Info Here',
+            fullInfo: 'full info hfdsffdsfdsfdsfdsdfsere',
+            rank: 'diamond4',
+            sex: 'male',
+            mainRoles: ['jungler'],
+            offRoles: ['mid'],
+            categories: ['cat1']
+        },
     ],
+
+    totalUsers: 0,
+    pagesAmount: null,
 }
 
 const playersReducer = (state = initialState, action) => {
- 
+
     switch (action.type) {
         case addACard:
-            state.playerCards.push(action.card)
+            state.cardsArr.push(action.card)
             return state;
         case putAllCardsIntoState:
             state.pagesAmount = Math.ceil(action.totalCardsInDb / action.amountOnAPage)
-            return { ...state, cardsArr: action.cards }  
+            debugger
+            return { ...state, cardsArr: action.cards }
         default: return state;
     }
 }
 
 
 export const fetchCardsTC = (amountOnAPage, page) => {
-
+    debugger;
     return (dispatch) => {
         instance.get(`/playerCards?amountOnAPage=${amountOnAPage}&page=${page}`, {
             body: {
@@ -47,7 +66,7 @@ export const fetchCardsTC = (amountOnAPage, page) => {
                 page
             }
         }).then((res) => {
-
+                debugger;
             dispatch(putAllCardsIntoStateAC(res.data.cards, res.data.totalCardsInDb, amountOnAPage))
         }).catch((err) => {
             console.log(err)

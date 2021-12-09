@@ -2,7 +2,7 @@ import React from 'react'
 import { Header } from './Components/Header/Header.jsx'
 import Options from './Components/Nav/Options.jsx'
 import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom'
-import PlayersComponent from './Components/MainContent/Players.jsx'
+import PlayersContainer from './Components/MainContent/Players/PlayersContainer'
 import TeamsComponent from './Components/MainContent/Teams.jsx'
 import DogsComponent from './Components/MainContent/Dogs.jsx'
 import Create from './Components/MainContent/Create/Create'
@@ -42,7 +42,7 @@ componentDidMount() {
                 <Route index path='home' element ={<MainPanel />} />
                 <Route path='registration' element={<RegistrationForm />} />
                 <Route path='login' element={<LoginFormContainer />} />
-                <Route path='players' element={<PlayersComponent Players={this.props.state.Players} />} />
+                <Route path='players' element={<PlayersContainer  />} />
                 <Route path='teams' element={<TeamsComponent Teams={this.props.state.Teams} />} />
                 <Route path='dogs' element={<DogsComponent />} />
                 <Route path='users' element={<AllUsers />} />
