@@ -25,7 +25,7 @@ const initialState = {
 }
 
 const playersReducer = (state = initialState, action) => {
-    // debugger;
+ 
     switch (action.type) {
         case addACard:
             state.playerCards.push(action.card)

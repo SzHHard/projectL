@@ -4,6 +4,7 @@ import { fetchUsersTC } from '../../../State/usersReducer'
 import Pagination from './Pagination';
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from 'react';
+import { Navigate } from 'react-router';
 
 const AllUsers = (props) => {
 
@@ -13,12 +14,16 @@ const AllUsers = (props) => {
        
         const amountOnAPage = 4;
         const currentPage = parseInt(searchParams.get('page'));
-        debugger;
+        console.log(' ')
         props.fetchUsersTC(amountOnAPage, (currentPage || 1))
     }, [searchParams.get('page')])
 
 
-    return (
+    const isLoggedIn = props.isLoggedIn;
+
+
+    return  !isLoggedIn ? <Navigate to='/login' replace={true} /> 
+    :(
         <div>
             {props.users.map((user) => {
                 return <div key={user._id}> {user.email} </div>
@@ -31,16 +36,12 @@ const AllUsers = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
+        isLoggedIn: state.CurrentUserInfo.isLoggedIn,
         users: state.Users.usersArr,
         totalUsers: state.Users.totalUsers,
         pagesAmount: state.Users.pagesAmount,
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchUsersTC,
-    }
-}
 
 export default connect(mapStateToProps, {fetchUsersTC})(AllUsers)

@@ -30,7 +30,6 @@ class RegisterLogin extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         isLoggedIn: state.CurrentUserInfo.isLoggedIn,
     }

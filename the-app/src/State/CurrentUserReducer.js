@@ -60,7 +60,9 @@ const currentUserReducer = (state = initialState, action) => {
 }
 
 export const checkAuthTC = () => (dispatch) => {
+
     instance.get('/refresh').then((res) => {
+
         const accessToken = res.data.accessToken;
         if (accessToken) {
             dispatch(addInfoAfterAuthenticationAC(res.data.user.email, res.data.accessToken))
@@ -69,6 +71,7 @@ export const checkAuthTC = () => (dispatch) => {
         }
     })
         .catch((err) => {
+
             console.log(err);
         })
 
@@ -107,11 +110,11 @@ export const logoutUserTC = () => (dispatch) => {
     })
 }
 
-const getAccessTokenAC = () => {
+export const getAccessTokenAC = () => {
     return {type: getAccessToken}
 }
 
-const setAccessTokenAC = (accessToken) => {
+export const setAccessTokenAC = (accessToken) => {
     return {type: setAccessToken, accessToken}
 }
 const addInfoAfterAuthenticationAC = (email, accessToken) => {
