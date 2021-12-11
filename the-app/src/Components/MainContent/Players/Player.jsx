@@ -1,13 +1,15 @@
 import React from 'react'
+import DeleteCardButton from './DeleteCardButton'
 import stylesPlayer from './Player.module.css'
+
 
 class Player extends React.Component {
 
     render() {
 
         let categoriesString = ''
-        console.log(this.props);
         this.props.categories.forEach((cat) => { categoriesString += `${cat} ` })
+
 
         /*
         {
@@ -44,9 +46,10 @@ class Player extends React.Component {
                         {categoriesString}
                     </div>
                 </div>
+                <DeleteCardButton id={this.props.id} />
             </div>
         )
     }
 }
 
-export default Player
+export default Player;

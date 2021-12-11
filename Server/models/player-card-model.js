@@ -15,4 +15,19 @@ const PlayerCardSchema = new Schema( {
 
 })
 
+// const PlayerCardSchema = new Schema( {
+//     user: {type: Schema.Types.ObjectId, ref: 'User'},
+//     profileUrl: {type: String },
+//     nickName: {type: String, },
+//     briefInfo: {type: String, },
+//     fullInfo: {type: String, },
+//     rank: {type: String, required: false},
+//     sex: {type: String},
+//     mainRoles: {type: Array, },
+//     offRoles: {type: Array},
+//     categories: {type: Array, }
+
+// })
+
+
 module.exports = model('PlayerCard', PlayerCardSchema);

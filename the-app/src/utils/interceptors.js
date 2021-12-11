@@ -3,7 +3,7 @@ import axios from 'axios';
 import { setAccessTokenAC } from '../State/CurrentUserReducer';
 
 export const instance = axios.create({
-    baseURL: 'http://localhost:3001/api/auth',
+    baseURL: 'http://localhost:3001/api',
     withCredentials: true,
 })
 

@@ -5,11 +5,8 @@ import { connect } from 'react-redux';
 import { useSearchParams } from "react-router-dom";
 
 
-
 // import Pagination from '../../common';
     
-
-
 const PlayersContainer = (props) => {
 
     let [searchParams, setSearchParams] = useSearchParams(1);
@@ -17,7 +14,6 @@ const PlayersContainer = (props) => {
     useEffect(() => {
         const amountOnAPage = 2;
         const currentPage = parseInt(searchParams.get('page'));
-        console.log(' ')
         props.fetchCardsTC(amountOnAPage, (currentPage || 1))
     
     }, [searchParams.get('page')] )
@@ -33,10 +29,7 @@ const PlayersContainer = (props) => {
 
 }
 
-
-
 const mapStateToProps = (state) => {
-    console.log(state.Players);
     return {
         cardsArr: state.Players.cardsArr,
        
@@ -46,10 +39,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         ,
-//     }
-// }
 
 export default connect(mapStateToProps,{fetchCardsTC})(PlayersContainer)

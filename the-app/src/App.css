@@ -2,27 +2,6 @@ body {
   background-color: #edeef0;
 }
 
-.header {
-  grid-area: header;
-  height: 40px;
-  background-color: #f3bf9a;
-  display: flex;
-  justify-content: space-between;
-  }
-
-
-
-.header .profileImg img {
-  height: 35px;
-  border-radius: 50px;
-}
-
-.profileImg {
-  cursor: pointer;
-  display: flex;
-  width: 40px;
-  align-items: center;
-}
 
 
 

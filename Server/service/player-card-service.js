@@ -1,5 +1,6 @@
-const { getCards } = require('../Cards/player-cards-controller');
+
 const PlayerCardModel = require('../models/player-card-model')
+
 
 const PlayerCardService = {
 
@@ -13,6 +14,16 @@ const PlayerCardService = {
     async getAllCards() {
         const cards = await PlayerCardModel.find();
         return cards;
+    },
+
+    async deleteCard(id) {
+        const card = await PlayerCardModel.deleteOne({_id: id})
+        return card;
+    },
+
+    async findCard(id) {
+        const card = await PlayerCardModel.findOne({_id: id})
+        return card;
     }
   
 }

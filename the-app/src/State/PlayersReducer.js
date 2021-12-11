@@ -1,13 +1,15 @@
 import axios from 'axios'
-
+import { instance } from '../utils/interceptors';
 
 const addACard = 'ADD-A-CARD';
 const putAllCardsIntoState = 'PUT-ALL-CARDS-INTO-STATE';
+const DELETE_PLAYER_CARD = 'DELETE_PLAYER_CARD';
 
-const instance = axios.create({
-    baseURL: 'http://localhost:3001/api/cards/',
-    withInfoAfterRegistration: true,
-})
+
+// const instance = axios.create({
+//     baseURL: 'http://localhost:3001/api/cards/',
+//     withInfoAfterRegistration: true,
+// })
 
 
 
@@ -38,9 +40,11 @@ const initialState = {
         },
     ],
 
-    totalUsers: 0,
+    totalCards: 0,
     pagesAmount: null,
 }
+
+
 
 const playersReducer = (state = initialState, action) => {
 
@@ -50,29 +54,72 @@ const playersReducer = (state = initialState, action) => {
             return state;
         case putAllCardsIntoState:
             state.pagesAmount = Math.ceil(action.totalCardsInDb / action.amountOnAPage)
-            debugger
-            return { ...state, cardsArr: action.cards }
+            return { ...state, cardsArr: action.cards, totalCards: action.totalCardsInDb }
+        case DELETE_PLAYER_CARD:
+            const newCardsArr = state.cardsArr.filter((card) => {
+                return card._id != action.id;
+            })
+            return { ...state, cardsArr: newCardsArr, /*totalCards: state.totalCards - 1 */ }
+
         default: return state;
     }
 }
 
 
 export const fetchCardsTC = (amountOnAPage, page) => {
-    debugger;
+
     return (dispatch) => {
-        instance.get(`/playerCards?amountOnAPage=${amountOnAPage}&page=${page}`, {
-            body: {
-                amountOnAPage,
-                page
-            }
-        }).then((res) => {
-                debugger;
-            dispatch(putAllCardsIntoStateAC(res.data.cards, res.data.totalCardsInDb, amountOnAPage))
-        }).catch((err) => {
-            console.log(err)
-        })
+        instance.get(`/cards/playerCards?amountOnAPage=${amountOnAPage}&page=${page}`)
+            .then((res) => {
+
+                dispatch(putAllCardsIntoStateAC(res.data.cards, res.data.totalCardsInDb, amountOnAPage))
+            }).catch((err) => {
+                console.log(err)
+            })
 
     }
+}
+
+export const createPlayerCardTC = (cardObj) => {  //not sure about args
+
+    return (dispatch) => {
+
+
+        instance.post(`/cards/playerCards`, {
+
+
+            cardData: { nickName: 'SzH (don\'t forget to customize)', ...cardObj },
+
+
+        })
+            .then(res => {
+                console.log(res);
+
+                //logic
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+    }
+}
+
+export const deletePlayerCardTC = (id) => {
+
+    return (dispatch) => {
+        instance.delete(`/cards/playerCards/${id}`)
+            .then((res) => {
+                dispatch(deletePlayerCardAC(id))
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+}
+
+
+export const deletePlayerCardAC = (id) => {
+    return { type: DELETE_PLAYER_CARD, id }
 }
 
 export const putAllCardsIntoStateAC = (cards, totalCardsInDb, amountOnAPage) => {

@@ -47,7 +47,7 @@ const usersReducer = (state = initialState, action) => {
 export const fetchUsersTC = (amountOnAPage, page) => {
 
     return (dispatch) => {
-        instance.get(`/users?amountOnAPage=${amountOnAPage}&page=${page}`, {
+        instance.get(`/auth/users?amountOnAPage=${amountOnAPage}&page=${page}`, {
             body: {
                 amountOnAPage,
                 page
