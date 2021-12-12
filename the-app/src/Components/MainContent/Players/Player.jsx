@@ -1,14 +1,14 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import DeleteCardButton from './DeleteCardButton'
 import stylesPlayer from './Player.module.css'
 import ModalWindow from '../../common/ModalWindow'
+import FullInfoAboutPlayer from './FullInfoAboutPlayer'
 
 const Player = (props) => {
 
-
     const [isActive, setIsActive] = useState(false);
 
-   const  openFullInfo = () => {
+    const openFullInfo = () => {
 
         setIsActive(true);
     }
@@ -18,7 +18,7 @@ const Player = (props) => {
 
     return (
 
-        <div className={stylesPlayer.er}>
+        <div className={stylesPlayer.wrapper}>
 
             <div className={stylesPlayer.playerInstance}>
 
@@ -35,13 +35,17 @@ const Player = (props) => {
                     {props.rank}
                 </div>
 
+                <div className={stylesPlayer.nicknameContainer}>
+                    {props.nickName}
+                </div>
+
                 <div className={stylesPlayer.categoriesContainer}>
                     {categoriesString}
 
                 </div>
             </div>
 
-            <ModalWindow isActive={isActive} setIsActive = {setIsActive}> {'ЫЫЫЫЫЫЫЫ'} </ModalWindow>
+            <ModalWindow isActive={isActive} setIsActive={setIsActive}> {<FullInfoAboutPlayer categoriesString={categoriesString} {...props} />} </ModalWindow>
 
             <DeleteCardButton id={props.id} />
 

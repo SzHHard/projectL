@@ -4,9 +4,10 @@
     border: 2px dotted blanchedalmond; */
     
     display: grid;
-    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-columns: 1fr 4fr 2fr 1fr;
     grid-template-rows: 5fr 2fr;
-    width: 98%;
+     width: 98%; 
+   
     height: 95%;
     margin: 0 auto;
     margin-top: 2px;
@@ -21,6 +22,7 @@
     grid-column-start: 1;
 }
 .mainInfoContainer {
+    padding: 5px;
     display: flex;
     height: 100%;
     background-color:lightcyan;
@@ -28,23 +30,29 @@
 }
 
 .rankIconContainer {
-    grid-column-start: 3;
+    grid-column-start: 4;
     background-color: lightyellow;
     /* grid-area: ri; */
 }
-
+.nicknameContainer{
+    padding: 5px;
+    grid-column-start: 3;
+    grid-row-start: 1;
+    background-color: rgb(218, 252, 205);
+}
 .categoriesContainer {
     background-color: lightgoldenrodyellow;
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 5;
     grid-row-start: 2;
 }
 
 .wrapper {
     
-    width: 80%;
+    width: 90%;
     height: 100px;
-    margin: 10px auto;
+    margin: 30px auto;
+    margin-top: 10px;
     border-radius: 15px;
     border: 2px dotted blanchedalmond;
 

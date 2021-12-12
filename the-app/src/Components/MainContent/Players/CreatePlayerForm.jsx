@@ -54,18 +54,11 @@ let CreatePlayerForm = (props) => {
 
                 <Field name="mainRoles" label='Основные роли: ' component={Select}
                     validate={[required]} />
-                    {/* <Field name="mainRoles" component="select">
-                        <option></option>
-                        <option value="Top">Top</option>
-                        <option value="Jungle">Jungle</option>
-                        <option value="Mid">Mid</option>
-                        <option value="Bottom">Bottom</option>
-                        <option value="Support">Support</option>
-                    </Field> */}
+                 
                 </div>
 
                 <div>
-                    <Field name="offRoles" label='Второстепенные роли: ' component={Input} type="text"
+                    <Field name="offRoles" label='Второстепенные роли: ' component={Select}
                         validate={[required]} />
                 </div>
 
