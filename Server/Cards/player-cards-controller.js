@@ -50,7 +50,6 @@ const PlayerCardsController = {
     async getMyCards(req, res, next) {
         try {
             const cards = await PlayerCardService.getMyCards(req.user.id);
-            console.log(cards)
 
             return res.json({ cards, })
         } catch (err) {

@@ -28,7 +28,12 @@ const UpdateCardButton = (props) => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
 
-export default connect(() => {return}, { updatePlayerCardTC })(UpdateCardButton);
+    }
+}
+
+export default connect(mapStateToProps, { updatePlayerCardTC })(UpdateCardButton);
 
 

@@ -11,7 +11,7 @@ playerCardsRouter = express.Router();
 playerCardsRouter.post('/playerCards', authMiddleware, PlayerCardsController.creatingCard);
 
 playerCardsRouter.get('/playerCards', PlayerCardsController.getCards);
-playerCardsRouter.get('/playerCards/myCards', PlayerCardsController.getMyCards);
+playerCardsRouter.get('/playerCards/myCards', authMiddleware, PlayerCardsController.getMyCards);
 
 playerCardsRouter.delete('/playerCards/:id', authMiddleware, PlayerCardsController.deleteCard);
 

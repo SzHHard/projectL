@@ -4,7 +4,7 @@ import {fetchCardsTC} from '../../../State/PlayersReducer'
 import { connect } from 'react-redux';
 import { useSearchParams } from "react-router-dom";
 import Pagination from '../../common/Pagination'
-
+import MyCardsButton from './MyCardsButton'
 
     
 const PlayersContainer = (props) => {
@@ -20,6 +20,7 @@ const PlayersContainer = (props) => {
 
     return  (
         <div>
+            <MyCardsButton />
             <Players cardsArr = {props.cardsArr}/>
             
             <Pagination pagesAmount={props.pagesAmount} />

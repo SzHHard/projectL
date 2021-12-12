@@ -15,6 +15,11 @@ const PlayerCardService = {
         const cards = await PlayerCardModel.find();
         return cards;
     },
+    
+    async getMyCards(userId) {
+        const cards = await PlayerCardModel.find({user: userId})
+        return cards;
+    },
 
     async deleteCard(id) {
         const card = await PlayerCardModel.deleteOne({_id: id})
@@ -28,7 +33,7 @@ const PlayerCardService = {
 
     async updateCard(id, newData) {
        const card = await PlayerCardModel.findOneAndUpdate({_id: id}, newData);
-       return card;
+       return card; //returns the old one...
     }
   
 }
