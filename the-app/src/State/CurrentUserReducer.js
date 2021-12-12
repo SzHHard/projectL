@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {instance} from '../utils/interceptors'
 
 
@@ -35,6 +34,7 @@ export const checkAuthTC = () => (dispatch) => {
     instance.get('/auth/refresh').then((res) => {
         const accessToken = res.data.accessToken;
         if (accessToken) {
+   
             dispatch(addInfoAfterAuthenticationAC( res.data.user, res.data.accessToken))
         } else {
             console.log('you don\'t have an access token');

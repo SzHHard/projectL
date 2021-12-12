@@ -1,55 +1,53 @@
-import React from 'react'
+import React, {useState} from 'react'
 import DeleteCardButton from './DeleteCardButton'
 import stylesPlayer from './Player.module.css'
+import ModalWindow from '../../common/ModalWindow'
+
+const Player = (props) => {
 
 
-class Player extends React.Component {
+    const [isActive, setIsActive] = useState(false);
 
-    render() {
+   const  openFullInfo = () => {
 
-        let categoriesString = ''
-        this.props.categories.forEach((cat) => { categoriesString += `${cat} ` })
-
-
-        /*
-        {
-            profileUrl: 'url',
-            nickName: 'szh',
-            briefInfo: 'brief Info Here',
-            fullInfo: 'full info here',
-            rank: 'diamond24',
-            sex: 'male',
-            mainRoles: ['jungler'],
-            offRoles: ['mid'],
-            categories: ['cat1, cat2']
-        }
-        */
-
-        return (
-
-            <div className={stylesPlayer.wrapper}>
-                <div className={stylesPlayer.playerInstance}>
-
-                    <div className={stylesPlayer.profileImageContainer}>
-                        {this.props.profileUrl}
-                    </div>
-
-                    <div className={stylesPlayer.mainInfoContainer}>
-                        {this.props.briefInfo}
-                    </div>
-
-                    <div className={stylesPlayer.rankIconContainer}>
-                        {this.props.rank}
-                    </div>
-
-                    <div className={stylesPlayer.categoriesContainer}>
-                        {categoriesString}
-                    </div>
-                </div>
-                <DeleteCardButton id={this.props.id} />
-            </div>
-        )
+        setIsActive(true);
     }
+
+    let categoriesString = ''
+    props.categories.forEach((cat) => { categoriesString += `${cat} ` })
+
+    return (
+
+        <div className={stylesPlayer.er}>
+
+            <div className={stylesPlayer.playerInstance}>
+
+                <div className={stylesPlayer.profileImageContainer}>
+                    {props.profileUrl}
+                </div>
+
+                <div onClick={openFullInfo} className={`${stylesPlayer.mainInfoContainer}`}>
+                    {props.briefInfo}
+
+                </div>
+
+                <div className={stylesPlayer.rankIconContainer}>
+                    {props.rank}
+                </div>
+
+                <div className={stylesPlayer.categoriesContainer}>
+                    {categoriesString}
+
+                </div>
+            </div>
+
+            <ModalWindow isActive={isActive} setIsActive = {setIsActive}> {'ЫЫЫЫЫЫЫЫ'} </ModalWindow>
+
+            <DeleteCardButton id={props.id} />
+
+        </div>
+    )
 }
+
 
 export default Player;

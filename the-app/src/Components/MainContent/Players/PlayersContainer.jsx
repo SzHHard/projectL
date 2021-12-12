@@ -9,7 +9,7 @@ import Pagination from '../../common/Pagination'
     
 const PlayersContainer = (props) => {
 
-    let [searchParams, setSearchParams] = useSearchParams(1);
+    let [searchParams] = useSearchParams(1);
 
     useEffect(() => {
         const amountOnAPage = 2;

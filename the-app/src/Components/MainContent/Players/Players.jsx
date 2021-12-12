@@ -3,15 +3,10 @@ import Player from './Player';
 import stylesPlayers from './Players.module.css';
 import CreatePlayerButton from './CreatePlayerButton';
 
-class Players extends React.Component {
+const Players = (props) => {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {};
-    }
-
-    render() {
+  
+  
 
         return (
 
@@ -19,12 +14,12 @@ class Players extends React.Component {
 
                 <CreatePlayerButton />
 
-                {this.props.cardsArr.map((card) => {return <Player id={card._id} profileUrl={card.profileUrl} briefInfo={card.briefInfo} rank={card.rank} categories={card.categories}/> })}
+                {props.cardsArr.map((card, index) => {return <Player  key={index} id={card._id} {...card} /> })}
                 Here will be PLAYERS components
             </div>
 
         )
-    }
+    
 }
 
 export default Players;

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Field, reduxForm, submit } from 'redux-form';
-import { email, maxLengthCreator, minLengthCreator, required } from '../../../utils/fieldValidation';
+import { Field, reduxForm } from 'redux-form';
+import { required } from '../../../utils/fieldValidation';
 import { Input, TextArea, Select } from '../../../utils/formFields';
 import { createPlayerCardTC } from '../../../State/PlayersReducer';
 import {connect} from 'react-redux';

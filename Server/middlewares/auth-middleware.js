@@ -13,12 +13,12 @@ module.exports = function (req, res, next) {
             return next(ApiError.UnauthoruzedError());
         }
         const userData = TokenService.validateAccessToken(accessToken);
-        // console.log('log from middleware; userData1: ' + userData);
+  
         if(!userData) {
             return next(ApiError.UnauthoruzedError());
         }
         
-        console.log('log from middleware; userData.id: ' + userData.id);
+       
         req.user = userData;
         next();
 

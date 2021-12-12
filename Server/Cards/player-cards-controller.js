@@ -5,7 +5,7 @@ const PlayerCardsController = {
 
     async creatingCard(req, res, next) {
         try {
-       
+    
             const card = await PlayerCardService.creatingCard(req.user.id,  req.body.cardData);  // cardData - объект, содержащий поля
             res.status(201).json({ card })
         } catch (err) {

@@ -20,7 +20,7 @@ const interceptor = (store) => {
         const originalConfig = err.config;
         console.log(originalConfig);
 
-        if (err.response.status == 401 && err.config && err.config.url !== '/refresh') {  
+        if (err.response.status === 401 && err.config && err.config.url !== '/refresh') {  
             originalConfig._isRetry = true; // не удалось менять 
 
             try {

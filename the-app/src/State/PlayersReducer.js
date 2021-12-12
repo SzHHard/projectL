@@ -1,17 +1,9 @@
-import axios from 'axios'
+
 import { instance } from '../utils/interceptors';
 
 const addACard = 'ADD-A-CARD';
 const putAllCardsIntoState = 'PUT-ALL-CARDS-INTO-STATE';
 const DELETE_PLAYER_CARD = 'DELETE_PLAYER_CARD';
-
-
-// const instance = axios.create({
-//     baseURL: 'http://localhost:3001/api/cards/',
-//     withInfoAfterRegistration: true,
-// })
-
-
 
 
 const initialState = {
@@ -57,7 +49,7 @@ const playersReducer = (state = initialState, action) => {
             return { ...state, cardsArr: action.cards, totalCards: action.totalCardsInDb }
         case DELETE_PLAYER_CARD:
             const newCardsArr = state.cardsArr.filter((card) => {
-                return card._id != action.id;
+                return card._id !== action.id;
             })
             return { ...state, cardsArr: newCardsArr, /*totalCards: state.totalCards - 1 */ }
 

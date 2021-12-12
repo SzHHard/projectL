@@ -10,7 +10,6 @@ import MainPanel from './Components/MainContent/AboutAndAd.jsx'
 import Success from './Components/MainContent/SuccessCreatedPlayerCard'
 import RegistrationForm from './Components/MainContent/RegistrationForm'
 import LoginFormContainer from './Components/MainContent/LoginForm.jsx'
-import store from './State/reduxStore';
 import './App.css'
 import CreatePlayerContainer from './Components/MainContent/Create/PlayerTeamSwitch/CreatePlayerContainer.jsx'
 import CreateTeamContainer from './Components/MainContent/Create/PlayerTeamSwitch/CreateTeamContainer.jsx'

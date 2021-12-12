@@ -24,7 +24,7 @@ const Pagination = (props) => {
 
             {
                 numbersArray.map((number) => {
-                    return <span className={styles.pointer + ' ' + ( number == searchParams.get('page') ? styles.active : '')} onClick={gotoPageCreator(number)}>  {number}  </span>
+                    return <span key={number} className={styles.pointer + ' ' + ( number === parseInt(searchParams.get('page')) ? styles.active : '')} onClick={gotoPageCreator(number)}>  {number}  </span>
                 })
             }
 

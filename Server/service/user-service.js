@@ -49,14 +49,16 @@ const UserService = {
             throw ApiError.UnauthoruzedError();
         }
         const userData = tokenService.validateRefreshToken(refreshToken);
+
         const tokenFromDb = await tokenService.findToken(refreshToken);
 
         if(!userData || !tokenFromDb) {
+
             throw ApiError.UnauthoruzedError();
         }
         const user = await UserModel.findById(userData.id);
         const userDto = new UserDto(user);
-        const tokens = tokenService.generateTokens({...userDto})
+        const tokens = tokenService.generateTokens({...userDto}) 
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
         return { ...tokens, user: userDto }

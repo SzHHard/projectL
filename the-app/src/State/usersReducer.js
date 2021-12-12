@@ -1,16 +1,5 @@
-import axios from 'axios'
 
 import {instance} from '../utils/interceptors'
-
-// const instance = axios.create({
-//     baseURL: 'http://localhost:3001/api/auth',
-//     withCredentials: true,
-// })
-
-// instance.interceptors.request.use((config) => {
-//     // debugger;
-//     config.headers.Authorization = `Bearer ${dispatch(getAccessTokenAC())}`
-// })
 
 
 const putAllUsersIntoState = 'PUT-ALL-USERS-INTO-STATE';

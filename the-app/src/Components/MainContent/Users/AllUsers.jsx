@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUsersTC } from '../../../State/usersReducer'
-import Pagination from './Pagination';
+import Pagination from '../../common/Pagination';
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from 'react';
 import { Navigate } from 'react-router';
 
 const AllUsers = (props) => {
 
-    let [searchParams, setSearchParams] = useSearchParams(1);
+    let [searchParams] = useSearchParams(1);
       
     useEffect(() => {
        
         const amountOnAPage = 4;
         const currentPage = parseInt(searchParams.get('page'));
-        console.log(' ')
+        
         props.fetchUsersTC(amountOnAPage, (currentPage || 1))
     }, [searchParams.get('page')])
 
@@ -22,7 +22,7 @@ const AllUsers = (props) => {
     const isLoggedIn = props.isLoggedIn;
 
 
-    return  !isLoggedIn ? <Navigate to='/login' replace={true} /> 
+    return   !isLoggedIn ? <Navigate to='/login' replace={true} /> 
     :(
         <div>
             {props.users.map((user) => {
