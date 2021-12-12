@@ -1,27 +1,26 @@
 import React, { useState } from 'react'
 import ModalWindow from '../../common/ModalWindow';
-import { connect } from 'react-redux';
-import CreatePlayerForm from './CreatePlayerForm';
+import CreatePlayerFormContainer from './CreatePlayerFormContainer';
 
 const CreatePlayerButton = (props) => {
 
     const [isActive, setIsActive] = useState(false);
 
+    const showWindow = () => {
+        setIsActive(true)
+    }
+
 
     return (
         <div>
-            <button onClick={() => setIsActive(true)} > Create one</button>
-            <ModalWindow isActive={isActive} setIsActive = {setIsActive}> {<CreatePlayerForm />} </ModalWindow>
+            <button onClick={showWindow} > Create one</button>
+            <ModalWindow isActive={isActive} setIsActive = {setIsActive}> {<CreatePlayerFormContainer />} </ModalWindow>
         </div>
     )
 }
 
 
 
-const mapStateToProps = (props) => {
-    return {
 
-    }
-}
 
-export default connect(mapStateToProps, {})(CreatePlayerButton)
+export default CreatePlayerButton

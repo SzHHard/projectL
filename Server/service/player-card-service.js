@@ -24,6 +24,11 @@ const PlayerCardService = {
     async findCard(id) {
         const card = await PlayerCardModel.findOne({_id: id})
         return card;
+    },
+
+    async updateCard(id, newData) {
+       const card = await PlayerCardModel.findOneAndUpdate({_id: id}, newData);
+       return card;
     }
   
 }

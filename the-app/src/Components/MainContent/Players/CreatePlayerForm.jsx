@@ -2,32 +2,28 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form';
 import { required } from '../../../utils/fieldValidation';
 import { Input, TextArea, Select } from '../../../utils/formFields';
+
+import { connect } from 'react-redux';
 import { createPlayerCardTC } from '../../../State/PlayersReducer';
-import {connect} from 'react-redux';
+import { updatePlayerCardTC } from '../../../State/PlayersReducer';
 
 let CreatePlayerForm = (props) => {
 
+    const submit = (values) => {
+        
+        if (props.action === 'create') {                // пока что по-другому ВООБЩЕ никак не работало. МОЖНО ДАЖЕ НЕ ПЫТАТЬСЯ ПЕРЕДАВАТЬ ФУНКЦИЮ submit ЧЕРЕЗ PROPS!!!! ВСЕ РАВНО НЕ ПОЛУЧИТСЯ
+            props.createPlayerCardTC(values)
+        } else if (props.action === 'update') {
+            console.log(props)
+            debugger;
+            props.updatePlayerCardTC(props.id, values)
+        }
+        // props.submit(values);
+    }
 
-    /*
-     {
-         profileUrl: 'url',          //нет в форме
-         nickName: 'szh',            //нет в форме
-         briefInfo: 'brief Info Here',
-         fullInfo: 'full info here',
-         rank: 'diamond24',
-         sex: 'male',                //radio
-         mainRoles: ['jungler'],     //onClick choose
-         offRoles: ['mid'],          //onClick choose (not required)
-         categories: ['cat1, cat2']  //onClick choose
-     }
-     */
-
-     const submit = (values) => {
-        console.log(values);
-        props.createPlayerCardTC(values)
-     }
 
     return (
+
         <div>
             <form onSubmit={props.handleSubmit(submit)}>
                 <div>
@@ -49,12 +45,12 @@ let CreatePlayerForm = (props) => {
                     <Field name="sex" label='Пол: ' component={Input} type="text"
                         validate={[required]} />
                 </div>
-          
+
                 <div>
 
-                <Field name="mainRoles" label='Основные роли: ' component={Select}
-                    validate={[required]} />
-                 
+                    <Field name="mainRoles" label='Основные роли: ' component={Select}
+                        validate={[required]} />
+
                 </div>
 
                 <div>
@@ -78,16 +74,18 @@ let CreatePlayerForm = (props) => {
     )
 }
 
+
 CreatePlayerForm = reduxForm({
     form: 'createPlayerCard'
 })(CreatePlayerForm);
 
-const mapStateToProps = (state) => {
+
+const mapStateToProps = (state) => {  // удалить
     return {
 
     }
 }
 
 
-export default connect(mapStateToProps, {createPlayerCardTC})(CreatePlayerForm);
+export default connect(mapStateToProps, { createPlayerCardTC, updatePlayerCardTC })(CreatePlayerForm);
 

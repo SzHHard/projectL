@@ -3,6 +3,7 @@ import DeleteCardButton from './DeleteCardButton'
 import stylesPlayer from './Player.module.css'
 import ModalWindow from '../../common/ModalWindow'
 import FullInfoAboutPlayer from './FullInfoAboutPlayer'
+import UpdateCardButton from './updateCardButton'
 
 const Player = (props) => {
 
@@ -48,6 +49,7 @@ const Player = (props) => {
             <ModalWindow isActive={isActive} setIsActive={setIsActive}> {<FullInfoAboutPlayer categoriesString={categoriesString} {...props} />} </ModalWindow>
 
             <DeleteCardButton id={props.id} />
+            <UpdateCardButton id={props.id}/>
 
         </div>
     )
