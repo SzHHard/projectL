@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import ModalWindow from '../../common/ModalWindow';
 import { updatePlayerCardTC } from '../../../State/PlayersReducer';
 import { connect } from 'react-redux';
-import CreatePlayerForm from './CreatePlayerForm';
+import CreatePlayerForm from './PlayerForm';
 
 const withId = (id) => {                    // хороший способ передать пропсы в children of modalWindow
 
