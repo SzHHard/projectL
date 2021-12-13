@@ -17,6 +17,16 @@ const Player = (props) => {
     let categoriesString = ''
     props.categories.forEach((cat) => { categoriesString += `${cat} ` })
 
+    let isCurrentUsersCard = false; 
+    console.log(props)
+    for (let index in props.MyCardsArr) {
+        //debugger;
+        if(props.MyCardsArr[index]._id === props.cardId) {
+           // debugger;
+            isCurrentUsersCard = true;
+        }
+    }
+
     return (
 
         <div className={stylesPlayer.wrapper}>
@@ -48,8 +58,8 @@ const Player = (props) => {
 
             <ModalWindow isActive={isActive} setIsActive={setIsActive}> {<FullInfoAboutPlayer categoriesString={categoriesString} {...props} />} </ModalWindow>
 
-            <DeleteCardButton id={props.id} />
-            <UpdateCardButton id={props.id}/>
+            { isCurrentUsersCard && <DeleteCardButton id={props.cardId} /> /* если id карточки содержится в массиве, приходящем из props, то отобразим */} 
+            { isCurrentUsersCard &&  <UpdateCardButton id={props.cardId}/> }
 
         </div>
     )

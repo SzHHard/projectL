@@ -6,8 +6,9 @@ import Players from '../Players/Players'
 const MyPlayerCards = (props) => {
 
     useEffect(() => {
+
         props.getMyCardsTC()
-    }, [])
+    }, [props.isLoggedIn])
 
     //получаю из стейта мои карты, вывожу через players (?)
     return props.cardsArr ? (
@@ -18,9 +19,10 @@ const MyPlayerCards = (props) => {
     : null
 }
 const mapStateToProps = (state) => {
-    console.log(state.Players.myCardsArr)
+
     return {
-        cardsArr: state.Players.myCardsArr
+        cardsArr: state.Players.MyCardsArr,
+        isLoggedIn: state.CurrentUserInfo.isLoggedIn
     }
 }
 

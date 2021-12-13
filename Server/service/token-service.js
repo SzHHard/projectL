@@ -6,7 +6,7 @@ const ApiError = require('../exceptions/api-error')
 const TokenService = {
 
     generateTokens(payload) {
-        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {expiresIn: '15m'});
+        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {expiresIn: '15s'});
         const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {expiresIn: '30d'});
         return {
             accessToken,
@@ -32,7 +32,7 @@ const TokenService = {
     validateAccessToken(token) {
         try {
             const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET)
-            console.log('UserData: ' + userData)
+    
             return userData;
         } catch(err) {
             //

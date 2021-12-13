@@ -16,7 +16,7 @@ const AllUsers = (props) => {
         const currentPage = parseInt(searchParams.get('page'));
         
         props.fetchUsersTC(amountOnAPage, (currentPage || 1))
-    }, [searchParams.get('page')])
+    }, [searchParams.get('page')], props.isLoggedIn)
 
 
     const isLoggedIn = props.isLoggedIn;

@@ -54,8 +54,8 @@ const playersReducer = (state = initialState, action) => {
             })
             return { ...state, cardsArr: newCardsArr, /*totalCards: state.totalCards - 1 */ }
         case PUT_MY_CARDS_INTO_STATE:
-            return { ...state, myCardsArr: action.cards }
-
+            return { ...state, MyCardsArr: action.cards, s:' ' }
+            
         case UPDATE_PLAYER_CARD:
 
 
@@ -81,7 +81,6 @@ export const fetchCardsTC = (amountOnAPage, page) => {
 export const getMyCardsTC = () => {
 
     return (dispatch) => {
-
         instance.get(`/cards/playerCards/myCards`)
             .then((res) => {
                 dispatch(putMyCardsIntoStateAC(res.data.cards))
@@ -132,7 +131,6 @@ export const deletePlayerCardTC = (id) => {
 export const updatePlayerCardTC = (id, cardObj) => {
 
     return (dispatch) => {
-        debugger;
         instance.put(`/cards/playerCards/${id}`, {
             cardData: { nickName: 'SzH (don\'t forget to customize)', ...cardObj }
         })

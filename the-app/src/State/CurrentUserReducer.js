@@ -33,6 +33,7 @@ export const checkAuthTC = () => (dispatch) => {
 
     instance.get('/auth/refresh').then((res) => {
         const accessToken = res.data.accessToken;
+        
         if (accessToken) {
    
             dispatch(addInfoAfterAuthenticationAC( res.data.user, res.data.accessToken))
