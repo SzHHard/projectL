@@ -53,7 +53,7 @@ export const Select = ({ input, meta, ...props }) => {
                 <label>{props.label}</label>
                 <select {...input} {...props} multiple={true} onChange={handleChange} value={[...Value]}  >
 
-                    <option></option>
+                    <option value="-">-</option>
                     <option value="Top">Top</option>
                     <option value="Jungle">Jungle</option>
                     <option value="Mid">Mid</option>

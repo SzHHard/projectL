@@ -9,13 +9,16 @@ import { updatePlayerCardTC } from '../../../State/PlayersReducer';
 
 let CreatePlayerForm = (props) => {
 
+
+    
+
     const submit = (values) => {
         
         if (props.action === 'create') {                // пока что по-другому ВООБЩЕ никак не работало. МОЖНО ДАЖЕ НЕ ПЫТАТЬСЯ ПЕРЕДАВАТЬ ФУНКЦИЮ submit ЧЕРЕЗ PROPS!!!! ВСЕ РАВНО НЕ ПОЛУЧИТСЯ
             props.createPlayerCardTC(values)
+          
+          //  window.location.href = "/myCards";
         } else if (props.action === 'update') {
-            console.log(props)
-            debugger;
             props.updatePlayerCardTC(props.id, values)
         }
         // props.submit(values);

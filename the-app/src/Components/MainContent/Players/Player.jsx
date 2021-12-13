@@ -17,8 +17,9 @@ const Player = (props) => {
     let categoriesString = ''
     props.categories.forEach((cat) => { categoriesString += `${cat} ` })
 
+
+    
     let isCurrentUsersCard = false; 
-    console.log(props)
     for (let index in props.MyCardsArr) {
         //debugger;
         if(props.MyCardsArr[index]._id === props.cardId) {

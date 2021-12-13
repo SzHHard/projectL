@@ -6,6 +6,7 @@ const putAllCardsIntoState = 'PUT-ALL-CARDS-INTO-STATE';
 const DELETE_PLAYER_CARD = 'DELETE_PLAYER_CARD';
 const UPDATE_PLAYER_CARD = 'UPDATE_PLAYER_CARD';
 const PUT_MY_CARDS_INTO_STATE = 'PUT_MY_CARDS_INTO_STATE';
+const ADD_MY_CARD = "ADD_MY_CARD"
 
 const initialState = {
     cardsArr: [
@@ -42,9 +43,9 @@ const initialState = {
 const playersReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case addACard:
-            state.cardsArr.push(action.card)
-            return state;
+        case ADD_MY_CARD:
+            console.log({...state, MyCardsArr: [action.card, ...state.MyCardsArray]})
+            return {...state, MyCardsArr: [action.card, ...state.MyCardsArray]};
         case putAllCardsIntoState:
             state.pagesAmount = Math.ceil(action.totalCardsInDb / action.amountOnAPage)
             return { ...state, cardsArr: action.cards, totalCards: action.totalCardsInDb }
@@ -52,10 +53,13 @@ const playersReducer = (state = initialState, action) => {
             const newCardsArr = state.cardsArr.filter((card) => {
                 return card._id !== action.id;
             })
-            return { ...state, cardsArr: newCardsArr, /*totalCards: state.totalCards - 1 */ }
+            const newMyCardsArr = state.MyCardsArr.filter((card) => {
+                return card._id !== action.id;
+            })
+            return { ...state, cardsArr: newCardsArr, MyCardsArr: newMyCardsArr /*totalCards: state.totalCards - 1 */    }
         case PUT_MY_CARDS_INTO_STATE:
-            return { ...state, MyCardsArr: action.cards, s:' ' }
-            
+            return { ...state, MyCardsArr: action.cards, }
+
         case UPDATE_PLAYER_CARD:
 
 
@@ -105,8 +109,9 @@ export const createPlayerCardTC = (cardObj) => {  //not sure about args
         })
             .then(res => {
                 console.log(res);
-
-                //logic
+                debugger;
+                dispatch(addMyCardAC(cardObj))
+            
             })
             .catch(err => {
                 console.log(err);
@@ -143,8 +148,12 @@ export const updatePlayerCardTC = (id, cardObj) => {
     }
 }
 
+export const addMyCardAC = (card) => {
+    debugger;
+    return {type: ADD_MY_CARD, card}
+}
 export const putMyCardsIntoStateAC = (cards) => {
-    return {type: PUT_MY_CARDS_INTO_STATE, cards}
+    return { type: PUT_MY_CARDS_INTO_STATE, cards }
 }
 
 export const updatePlayerCardAC = () => {  // добавить параметров
