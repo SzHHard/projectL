@@ -44,24 +44,43 @@ const playersReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_MY_CARD:
-            console.log({...state, MyCardsArr: [action.card, ...state.MyCardsArray]})
-            return {...state, MyCardsArr: [action.card, ...state.MyCardsArray]};
+         //   debugger;
+            console.log({ ...state, cardsArr:  [action.card, ...state.cardsArr], MyCardsArr: [action.card, ...state.MyCardsArr] })
+            return { ...state, cardsArr:  [action.card, ...state.cardsArr], MyCardsArr: [action.card, ...state.MyCardsArr] };
         case putAllCardsIntoState:
             state.pagesAmount = Math.ceil(action.totalCardsInDb / action.amountOnAPage)
             return { ...state, cardsArr: action.cards, totalCards: action.totalCardsInDb }
         case DELETE_PLAYER_CARD:
+
             const newCardsArr = state.cardsArr.filter((card) => {
                 return card._id !== action.id;
             })
             const newMyCardsArr = state.MyCardsArr.filter((card) => {
                 return card._id !== action.id;
             })
-            return { ...state, cardsArr: newCardsArr, MyCardsArr: newMyCardsArr /*totalCards: state.totalCards - 1 */    }
+            return { ...state, cardsArr: newCardsArr, MyCardsArr: newMyCardsArr /*totalCards: state.totalCards - 1 */ }
         case PUT_MY_CARDS_INTO_STATE:
             return { ...state, MyCardsArr: action.cards, }
 
         case UPDATE_PLAYER_CARD:
-
+            const myCardsArrWithUpd = state.MyCardsArr.map((card) => {
+                if (card._id === action.id) {
+                    
+                    card = action.cardObj; 
+                
+                }
+                return card;
+            })
+            const cardsArrWithUpd = state.cardsArr.map((card) => {
+                if (card._id === action.id) {
+                    
+                    card = action.cardObj; //СЕЙЧАС ЕСТЬ БАГ!!! категории должны быть массивом!
+                    // card.categories = [card.categories]  
+                }
+                return card;
+            })
+            
+            return { ...state, cardsArr: cardsArrWithUpd, MyCardsArr: myCardsArrWithUpd }
 
         default: return state;
     }
@@ -101,17 +120,11 @@ export const createPlayerCardTC = (cardObj) => {  //not sure about args
 
 
         instance.post(`/cards/playerCards`, {
-
-
             cardData: { nickName: 'SzH (don\'t forget to customize)', ...cardObj },
-
-
         })
             .then(res => {
                 console.log(res);
-                debugger;
                 dispatch(addMyCardAC(cardObj))
-            
             })
             .catch(err => {
                 console.log(err);
@@ -140,7 +153,7 @@ export const updatePlayerCardTC = (id, cardObj) => {
             cardData: { nickName: 'SzH (don\'t forget to customize)', ...cardObj }
         })
             .then((res) => {
-                //dispatch
+                dispatch(updatePlayerCardAC(id, cardObj))
             })
             .catch((err) => {
                 console.log(err)
@@ -149,15 +162,14 @@ export const updatePlayerCardTC = (id, cardObj) => {
 }
 
 export const addMyCardAC = (card) => {
-    debugger;
-    return {type: ADD_MY_CARD, card}
+    return { type: ADD_MY_CARD, card }
 }
 export const putMyCardsIntoStateAC = (cards) => {
     return { type: PUT_MY_CARDS_INTO_STATE, cards }
 }
 
-export const updatePlayerCardAC = () => {  // добавить параметров
-    return { type: UPDATE_PLAYER_CARD, }
+export const updatePlayerCardAC = (id, cardObj) => {  // добавить параметров
+    return { type: UPDATE_PLAYER_CARD, id, cardObj}
 }
 
 export const deletePlayerCardAC = (id) => {

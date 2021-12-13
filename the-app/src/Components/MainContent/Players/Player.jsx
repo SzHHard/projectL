@@ -4,6 +4,8 @@ import stylesPlayer from './Player.module.css'
 import ModalWindow from '../../common/ModalWindow'
 import FullInfoAboutPlayer from './FullInfoAboutPlayer'
 import UpdateCardButton from './updateCardButton'
+import CardSettingsButton from './CardSettingsButton'
+
 
 const Player = (props) => {
 
@@ -14,11 +16,13 @@ const Player = (props) => {
         setIsActive(true);
     }
 
+
     let categoriesString = ''
+    //console.log(props.categories)
     props.categories.forEach((cat) => { categoriesString += `${cat} ` })
 
 
-    
+
     let isCurrentUsersCard = false; 
     for (let index in props.MyCardsArr) {
         //debugger;
@@ -45,22 +49,27 @@ const Player = (props) => {
 
                 <div className={stylesPlayer.rankIconContainer}>
                     {props.rank}
+                    {isCurrentUsersCard && <CardSettingsButton id = {props.cardId} />}
                 </div>
 
                 <div className={stylesPlayer.nicknameContainer}>
                     {props.nickName}
                 </div>
+                
 
                 <div className={stylesPlayer.categoriesContainer}>
                     {categoriesString}
 
                 </div>
+                
             </div>
+            
 
             <ModalWindow isActive={isActive} setIsActive={setIsActive}> {<FullInfoAboutPlayer categoriesString={categoriesString} {...props} />} </ModalWindow>
 
-            { isCurrentUsersCard && <DeleteCardButton id={props.cardId} /> /* если id карточки содержится в массиве, приходящем из props, то отобразим */} 
-            { isCurrentUsersCard &&  <UpdateCardButton id={props.cardId}/> }
+           
+             
+            
 
         </div>
     )
