@@ -11,3 +11,8 @@
 .active {
     border: 1px solid black;
 }
+
+.pagination {
+   display:flex;
+   justify-content: center;
+}

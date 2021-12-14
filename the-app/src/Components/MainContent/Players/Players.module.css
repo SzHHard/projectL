@@ -4,5 +4,13 @@
     min-width: 800px;
     max-width: 1000px;
     border-radius: 20px;
-    padding: 10px;
+    padding: 20px;
+}
+
+
+.playersHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    
 }

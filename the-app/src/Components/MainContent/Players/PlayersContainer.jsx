@@ -4,8 +4,9 @@ import { fetchCardsTC } from '../../../State/PlayersReducer'
 import { connect } from 'react-redux';
 import { useSearchParams } from "react-router-dom";
 import Pagination from '../../common/Pagination'
-import MyCardsButton from './MyCardsButton'
+
 import { getMyCardsTC } from '../../../State/PlayersReducer'
+import styles from './PlayersContainer.module.css';
 
 const PlayersContainer = (props) => {
 
@@ -14,9 +15,7 @@ const PlayersContainer = (props) => {
     useEffect(() => {
         const amountOnAPage = props.amountOnAPage;
         const currentPage = parseInt(searchParams.get('page'));
-
         const role = searchParams.get('role');
-        console.log('role: ' + role)
 
         props.fetchCardsTC(amountOnAPage , (currentPage || 1), role)
 
@@ -28,8 +27,8 @@ const PlayersContainer = (props) => {
     }, [props.isLoggedIn])
 
     return (
-        <div>
-            <MyCardsButton />
+        <div className = {styles.container}>
+            
             <Players cardsArr={props.cardsArr} />
 
             <Pagination pagesAmount={props.pagesAmount} />

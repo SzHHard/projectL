@@ -12,10 +12,10 @@ const CreatePlayerButton = (props) => {
 
 
     return (
-        <div>
+        <span>
             <button onClick={showWindow} > Create one</button>
             <ModalWindow isActive={isActive} setIsActive = {setIsActive}> {<CreatePlayerFormContainer />} </ModalWindow>
-        </div>
+        </span>
     )
 }
 

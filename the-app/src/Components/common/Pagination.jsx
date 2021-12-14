@@ -16,13 +16,13 @@ const Pagination = (props) => {
     const gotoPageCreator = (pageNumber) => {
         return () => {
             const role = searchParams.get('role');
-            
+
             return setSearchParams({ role, page: pageNumber })
         }
     }
    
     return (
-        <div>
+        <div className={styles.pagination}>
 
             {
                 numbersArray.map((number) => {

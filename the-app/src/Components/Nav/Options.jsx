@@ -4,56 +4,49 @@ import Filters from './Filters/Filters';
 //import NavTeams from './Teams'
 import NavItem from './NavItemClassForInheritance'
 import stylesOptions from './Options.module.css'
+import { useLocation } from 'react-router-dom';
 
-class Options extends React.Component {
+const Options = (props) => {
 
-    constructor(props) {
-        super(props);
+    let location = useLocation();
 
-        this.state = {};
+    return (
 
-    }
+        <div className={stylesOptions.navigation}>
 
-    render() {
+            <NavItem apiAddress='/home'>
+                Home
+            </NavItem>
 
-        return (
+            <NavItem apiAddress='/players'>
+                Players
+            </NavItem>
 
-            <div className={stylesOptions.navigation}>
+            <NavItem apiAddress='/teams'>
+                Teams
+            </NavItem>
 
-                <NavItem apiAddress='/home'>
-                   Home
-                </NavItem>
+            <NavItem apiAddress='/tournaments'>
+                Tournaments
+            </NavItem>
 
-                <NavItem apiAddress='/players'>
-                    Players
-                </NavItem>
+            <NavItem apiAddress='/dogs'>
+                Dogs
+            </NavItem>
 
+            <NavItem apiAddress='/users'>
+                Users
+            </NavItem>
 
-                <NavItem apiAddress='/teams'>
-                    Teams
-                </NavItem>
+            <NavItem apiAddress='/create'>
+                Create
+            </NavItem>
 
-                <NavItem apiAddress='/tournaments'>
-                    Tournaments
-                </NavItem>
+            {location.pathname === '/players' && <Filters />}
 
-                <NavItem apiAddress='/dogs'>
-                    Dogs
-                </NavItem>
+        </div>
+    )
 
-                <NavItem apiAddress='/users'>
-                    Users
-                </NavItem>
-
-                <NavItem apiAddress='/create'>
-                    Create
-                </NavItem>
-
-                <Filters />
-
-            </div>
-        )
-    }
 }
 
 export default Options;

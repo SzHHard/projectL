@@ -9,7 +9,9 @@ body {
   align-self: center;
 }
 
-
+main {
+  margin-top: 10px;
+}
 
 .App {
   display: grid;
