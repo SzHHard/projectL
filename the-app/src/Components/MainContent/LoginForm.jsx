@@ -25,6 +25,7 @@ class LoginForm extends React.Component {
     render() {
         
         const isLoggedIn = this.props.isLoggedIn;
+
         return  isLoggedIn ? <Navigate to='/home' replace={true} /> 
         : (
             <form onSubmit={this.props.handleSubmit(this.submit)}>

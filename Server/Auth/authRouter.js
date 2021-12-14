@@ -6,6 +6,7 @@ const authMiddleware = require('../middlewares/auth-middleware');
 const authRouter = express.Router();
 
 authRouter.post('/registration',
+    body('profileName').isLength({min: 3, max: 20}),
     body('email').isEmail(),
     body('password').isLength({min:4, max: 32}),
     UserController.registration)

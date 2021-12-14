@@ -19,7 +19,7 @@ class RegistrationForm extends React.Component {
     }
 
     submit(values) {
-        this.props.createUserTC(values.email, values.password);
+        this.props.createUserTC(values.profileName, values.email, values.password);
     }
 
     render() {
@@ -28,12 +28,9 @@ class RegistrationForm extends React.Component {
         :(
             <form onSubmit={this.props.handleSubmit(this.submit)}>
                 <div>
-                    {/* <label htmlFor="firstName"> </label> */}
-                    <Field name="firstName" label = 'First Name: ' component={Input} type="text" />
+                    <Field name="profileName" label = 'Profile name: ' component={Input} type="text" />
                 </div>
-                <div>
-                    <Field name="secondName" label = 'Second Name: 'component={Input} type="text" />
-                </div>
+                
                 <div>
                     <Field name="email" label = 'Email: ' component={Input} type="text"
                     validate = {[required, email]} />

@@ -15,7 +15,7 @@ const currentUserReducer = (state = initialState, action) => {
             // state.email = action.email;
             // state.accessToken = action.accessToken;
             // state.isLoggedIn = true;
-
+                console.log(action.userObj)
             return { ...action.userObj, accessToken: action.accessToken, isLoggedIn: true, };
         case deleteInfoAfterLoggingOut:
             state = { isLoggedIn: false }
@@ -48,10 +48,9 @@ export const checkAuthTC = () => (dispatch) => {
 
 }
 
-export const createUserTC = (email, password) => {
+export const createUserTC = (profileName, email, password) => {
     return (dispatch) => {
-        instance.post('/auth/registration', { email, password }).then((res) => {
-         
+        instance.post('/auth/registration', { profileName, email, password }).then((res) => {
             dispatch(addInfoAfterAuthenticationAC(res.data.user, res.data.accessToken))
         }).catch((err) => {
             console.log(err)
@@ -62,8 +61,6 @@ export const createUserTC = (email, password) => {
 export const loginUserTC = (email, password) => {
     return (dispatch) => {
         instance.post('/auth/login', { email, password }).then((res) => {
-            console.log(res);
-
             dispatch(addInfoAfterAuthenticationAC(res.data.user, res.data.accessToken))
         }).catch((err) => {
             console.log(err)

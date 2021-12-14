@@ -19,7 +19,7 @@ const Players = (props) => {
                 <MyCardsButton />
             </div>
 
-            {props.cardsArr.map((card, index) => { return <Player key={index} cardId={card._id} {...card} /> })}
+            {props.cardsArr.map((card, index) => { return <Player key={index} cardId={card._id}  {...card} /> })}
 
         </div>
 

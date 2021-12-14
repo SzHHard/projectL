@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose');
 
 const UserSchema = new Schema( {
-    // nickName: {type: String, default: 'defaultFromMyModel'},
+    profileName: {type: String, max: 18, required: true, unique: true},
     email: {type: String, unique: true, required: true},
     password: {type: String, required: true},
     isActivated: {type: Boolean, default: false},

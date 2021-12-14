@@ -24,6 +24,9 @@ const FullInfoAboutPlayer = (props) => {
                 <div>
                     fullInfo:  {props.fullInfo}
                 </div>
+                <div>
+                    Primary server:  {props.server}
+                </div>
 
                 <div>
                     Main Roles: {props.mainRoles.join(', ')}

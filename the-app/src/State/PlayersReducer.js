@@ -122,11 +122,12 @@ export const createPlayerCardTC = (cardObj) => {  //not sure about args
 
     return (dispatch) => {
 
-
+        debugger
         instance.post(`/cards/playerCards`, {
             cardData: { nickName: 'SzH (don\'t forget to customize)', ...cardObj },
         })
             .then(res => {
+                debugger
                 console.log(res);
                 dispatch(addMyCardAC(cardObj))
             })

@@ -6,20 +6,19 @@ const ApiError = require('../exceptions/api-error');
 
 const UserService = {
 
-    async registration(email, password) {
+    async registration(profileName, email, password) {
         const candidate = await UserModel.findOne({ email })
         if (candidate) {
             throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
         }
         const hashPassword = await bcrypt.hash(password, 8)
         // const activationLink 
-        const user = await UserModel.create({ email, password: hashPassword });
+        const user = await UserModel.create({ profileName, email, password: hashPassword });
         // await mailService.sendActivationMail(email, activationLink);
-
-        const userDto = new UserDto(user) // id, email, isActivated. We don't want to pass the password into jwt payload
+    
+        const userDto = new UserDto(user) 
         const tokens = tokenService.generateTokens({ ...userDto });
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
-
         return { ...tokens, user: userDto }
     },
 
@@ -33,6 +32,7 @@ const UserService = {
             throw ApiError.BadRequest('Неверный email или пароль')
         }
         const userDto = new UserDto(user);
+
         const tokens = tokenService.generateTokens({...userDto})
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
 

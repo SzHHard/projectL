@@ -19,12 +19,15 @@ const UserController = {
 
 
         try {
+            console.log(req.body.profileName, req.body.email);
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
             }
-            const { email, password } = req.body;
-            const userData = await UserService.registration(email, password);
+            const { profileName, email, password } = req.body;
+            console.log('profileName: ' + profileName);
+            const userData = await UserService.registration(profileName, email, password);
+            console.log('userData.profileName: ' + userData.profileName);
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true }) //если https, добавить secure: true
             return res.json(userData);
         } catch (err) {

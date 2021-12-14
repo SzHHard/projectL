@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import DeleteCardButton from './DeleteCardButton'
-import stylesPlayer from './Player.module.css'
+import styles from './Player.module.css' // при необходимости вернуть на НЕ COPY
 import ModalWindow from '../../common/ModalWindow'
 import FullInfoAboutPlayer from './FullInfoAboutPlayer'
 import UpdateCardButton from './updateCardButton'
@@ -23,53 +23,77 @@ const Player = (props) => {
 
 
 
-    let isCurrentUsersCard = false; 
+    let isCurrentUsersCard = false;
     for (let index in props.MyCardsArr) {
-        //debugger;
-        if(props.MyCardsArr[index]._id === props.cardId) {
-           // debugger;
+
+        if (props.MyCardsArr[index]._id === props.cardId) {
+
             isCurrentUsersCard = true;
         }
     }
-
     return (
 
-        <div className={stylesPlayer.wrapper}>
+        <div className={styles.wrapper}>
 
-            <div className={stylesPlayer.playerInstance}>
+            <div className={styles.playerInstance}>
 
-                <div className={stylesPlayer.profileImageContainer}>
+                <div className={styles.profileImageContainer}>
                     {props.profileUrl}
                 </div>
 
-                <div onClick={openFullInfo} className={`${stylesPlayer.mainInfoContainer}`}>
-                    {props.briefInfo}
-
+                <div className={styles.profileNameContainer}>
+                    {props.profileName}
                 </div>
 
-                <div className={stylesPlayer.rankIconContainer}>
-                    {props.rank}
-                    {isCurrentUsersCard && <CardSettingsButton id = {props.cardId} />}
-                </div>
+                <div className={styles.contentContainer}>
 
-                <div className={stylesPlayer.nicknameContainer}>
-                    {props.nickName}
-                </div>
-                
+                    <div className={styles.rolesRankServerContainer}>
 
-                <div className={stylesPlayer.categoriesContainer}>
+                        <div className={styles.roles}>
+
+                            {props.mainRoles.map((role, index) => {
+                                return <span key={index} className={styles.mainRoles}> {role} </span>
+                            })}
+
+                            {props.offRoles.map((role, index) => {
+                                return <span className={styles.offRoles}> {role} </span>
+                            })}
+                        </div>
+
+                        <div className={styles.serverRank}>
+                            <span> {props.server} </span>
+                            <span> {props.rank} </span>
+                        </div>
+                    </div>
+
+
+
+                    <div onClick={openFullInfo} className={`${styles.mainInfoContainer}`}>
+                        {props.briefInfo}
+
+                    </div>
+                </div>
+                <div className={styles.categoriesContainer}>
                     {categoriesString}
-
                 </div>
-                
+
+                <div className={styles.interactions}>
+                    {isCurrentUsersCard && <CardSettingsButton id={props.cardId} />}
+                </div>
+
+
+
+
+
+
             </div>
-            
+
 
             <ModalWindow isActive={isActive} setIsActive={setIsActive}> {<FullInfoAboutPlayer categoriesString={categoriesString} {...props} />} </ModalWindow>
 
-           
-             
-            
+
+
+
 
         </div>
     )

@@ -22,7 +22,7 @@ const UpdateCardButton = (props) => {
 
     return (
         <div>
-            <button onClick={showWindow} > Update one </button>
+            <button onClick={showWindow} > Update </button>
             <ModalWindow  isActive={isActive} setIsActive = {setIsActive}> {withId(props.id)}    </ModalWindow>
         </div>
     )
