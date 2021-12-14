@@ -15,7 +15,9 @@ const Pagination = (props) => {
 
     const gotoPageCreator = (pageNumber) => {
         return () => {
-            return setSearchParams({ page: pageNumber })
+            const role = searchParams.get('role');
+            
+            return setSearchParams({ role, page: pageNumber })
         }
     }
    

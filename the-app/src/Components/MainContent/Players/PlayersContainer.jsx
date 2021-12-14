@@ -14,7 +14,11 @@ const PlayersContainer = (props) => {
     useEffect(() => {
         const amountOnAPage = props.amountOnAPage;
         const currentPage = parseInt(searchParams.get('page'));
-        props.fetchCardsTC(amountOnAPage , (currentPage || 1))
+
+        const role = searchParams.get('role');
+        console.log('role: ' + role)
+
+        props.fetchCardsTC(amountOnAPage , (currentPage || 1), role)
 
     }, [searchParams.get('page')])
 
