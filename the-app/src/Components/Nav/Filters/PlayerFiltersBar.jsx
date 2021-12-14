@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from "react-router-dom";
 
 const PlayerFiltersBar = (props) => {
@@ -10,49 +10,58 @@ const PlayerFiltersBar = (props) => {
         const currentPage = parseInt(searchParams.get('page'));
         const filterRole = searchParams.get('role')
 
-        console.log('filterRole: ' +  filterRole)
-        
+        //console.log('filterRole: ' + filterRole)
+
         props.fetchCardsTC(amountOnAPage, (currentPage || 1), filterRole)
 
     }, [searchParams.get('role')])
 
-  
-  
+
+
     const mySetQuery = (e) => {
-        let  page = searchParams.get('page')
+        let page = searchParams.get('page')
         if (e.target.checked) {
             const filterValue = e.target.value;
             const targetName = e.target.name;
             return setSearchParams({ page, [targetName]: filterValue })
         } else {
-            return setSearchParams({page})
+            return setSearchParams({ page })
         }
     }
 
     return (
         <div>
-            <label>
-                Топ
-                <input onChange={mySetQuery} name='role' type='checkbox' value='Top' />
-            </label>
-            <label>
-                Лес
-                <input type='checkbox' name='role' value='Jungle' />
-            </label>
-            <label>
-                Мид
-                <input type='checkbox' name='role' value='Mid' />
-            </label>
-            <label>
-                Бот
-                <input type='checkbox' name='role' value='Bottom' />
-            </label>
 
+            <RoleRadio value='' handleChange={mySetQuery}> Все </RoleRadio>
+            <RoleRadio value='Top' handleChange={mySetQuery}> Топ </RoleRadio>
+
+            <RoleRadio value='Jungle' handleChange={mySetQuery}> Лес </RoleRadio>
+
+
+            <RoleRadio value='Mid' handleChange={mySetQuery}> Мид </RoleRadio>
+
+            <RoleRadio value='Bottom' handleChange={mySetQuery}> Поро </RoleRadio>
+
+            <RoleRadio value='Support' handleChange={mySetQuery}> Саппорт </RoleRadio>
+
+        </div>
+
+    )
+}
+
+
+const RoleRadio = (props) => {
+
+    let [searchParams] = useSearchParams();
+
+    return (
+        <div>
             <label>
-                Саппорт
-                <input type='checkbox' name='role' value='Support' />
+                {props.children}
+                <input onChange={props.handleChange} type='radio' name='role' value={props.value} checked={searchParams.get('role') === props.value} />
             </label>
         </div>
     )
 }
+
 export default PlayerFiltersBar;
