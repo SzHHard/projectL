@@ -12,9 +12,9 @@ const PlayersContainer = (props) => {
     let [searchParams] = useSearchParams(1);
 
     useEffect(() => {
-        const amountOnAPage = 2;
+        const amountOnAPage = props.amountOnAPage;
         const currentPage = parseInt(searchParams.get('page'));
-        props.fetchCardsTC(amountOnAPage, (currentPage || 1))
+        props.fetchCardsTC(amountOnAPage , (currentPage || 1))
 
     }, [searchParams.get('page')])
 
@@ -38,7 +38,7 @@ const PlayersContainer = (props) => {
 const mapStateToProps = (state) => {
     return {
         cardsArr: state.Players.cardsArr,
-
+        amountOnAPage: state.Players.amountOnAPage,
         isLoggedIn: state.CurrentUserInfo.isLoggedIn,
         // totalCards: state.Player.to
         pagesAmount: state.Players.pagesAmount,

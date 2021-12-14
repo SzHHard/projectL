@@ -13,8 +13,7 @@ module.exports = function (req, res, next) {
             return next(ApiError.UnauthoruzedError());
         }
         const userData = TokenService.validateAccessToken(accessToken);
-        console.log('str 16 userData: ' + userData.id);
-
+        console.log('')
         if(!userData) {
             return next(ApiError.UnauthoruzedError());
         }

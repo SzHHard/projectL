@@ -15,10 +15,10 @@ let CreatePlayerForm = (props) => {
 
 
         if (props.action === 'create') {                // пока что по-другому ВООБЩЕ никак не работало. МОЖНО ДАЖЕ НЕ ПЫТАТЬСЯ ПЕРЕДАВАТЬ ФУНКЦИЮ submit ЧЕРЕЗ PROPS!!!! ВСЕ РАВНО НЕ ПОЛУЧИТСЯ
-            props.createPlayerCardTC({...values, categories})
+            props.createPlayerCardTC({ ...values, categories })
             //  window.location.href = "/myCards";
         } else if (props.action === 'update') {
-            props.updatePlayerCardTC(props.id, {...values, categories})
+            props.updatePlayerCardTC(props.id, { ...values, categories })
         }
         // props.submit(values);
     }
@@ -56,9 +56,17 @@ let CreatePlayerForm = (props) => {
                         validate={[required]} />
                 </div>
 
-                <div>
+                {/* <div>
                     <Field name="sex" label='Пол: ' component={Input} type="text"
                         validate={[required]} />
+                </div> */}
+
+
+                <div>
+                    <label>Пол: </label>
+                    <label><Field name="sex" component="input" type="radio" value="male" /> Male </label>
+                    <label><Field name="sex" component="input" type="radio" value="female" /> Female </label>
+                    <label><Field name="sex" component="input" type="radio" value="other" /> Other </label>
                 </div>
 
                 <div>
@@ -78,7 +86,7 @@ let CreatePlayerForm = (props) => {
                         validate={[required]} />
                 </div> */}
                 <div>
-                    <label> Категории: 
+                    <label> Категории:
                         <input type='text' placeholder='Очередная категория' value={currentCategory} onChange={handleEnterCategory} />
                         <button type="button" onClick={addCategory}>
                             Добавить

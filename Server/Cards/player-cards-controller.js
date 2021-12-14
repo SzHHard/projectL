@@ -1,5 +1,8 @@
-const PlayerCardService = require('../service/player-card-service');
+const { PlayerCardService } = require('../service/player-card-service');
 const ApiError = require('../exceptions/api-error')
+
+const { getAllCardsAC } = require('../service/player-card-service');
+const {rolesIncludeAnyOfTheGivenAC} = require('../service/player-card-service');
 
 const PlayerCardsController = {
 
@@ -20,16 +23,26 @@ const PlayerCardsController = {
 
     async getCards(req, res, next) {
         try {
-            const cards = await PlayerCardService.getAllCards();
-            //
+            let cards = [];
+            // const cards = await PlayerCardService.getAllCards();
+            
+            if(req.query.role && req.query.role !== 'null' && req.query.role !== 'undefined') {
+            
+                cards = await PlayerCardService.getCardsWithFilters(rolesIncludeAnyOfTheGivenAC(req.query.role))
+            } else {
+                cards = await PlayerCardService.getCardsWithFilters(getAllCardsAC());
+            }
+           
 
             if (req.query.amountOnAPage && req.query.page) {
+                
                 //amountOnAPage=1&page=1
                 const totalCards = cards.length;
                 const amountOnAPage = req.query.amountOnAPage;
                 const page = req.query.page;
-
+               
                 cardsOnCurrentPage = cards.filter((card, index) => {
+                   
                     if ((index >= (page - 1) * amountOnAPage) && (index < page * amountOnAPage)) {
                         return true
                     }

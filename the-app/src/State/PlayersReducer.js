@@ -36,6 +36,7 @@ const initialState = {
 
     totalCards: 0,
     pagesAmount: null,
+    amountOnAPage: 6,
 }
 
 
@@ -87,12 +88,17 @@ const playersReducer = (state = initialState, action) => {
 }
 
 
-export const fetchCardsTC = (amountOnAPage, page) => {
+export const fetchCardsTC = (amountOnAPage, page, role) => {
 
     return (dispatch) => {
-        instance.get(`/cards/playerCards?amountOnAPage=${amountOnAPage}&page=${page}`)
+        console.log(role)
+        instance.get(`/cards/playerCards?amountOnAPage=${amountOnAPage}&page=${page}`, {
+            params: {
+                role
+            }
+        })
             .then((res) => {
-
+                console.log(res);
                 dispatch(putAllCardsIntoStateAC(res.data.cards, res.data.totalCardsInDb, amountOnAPage))
             }).catch((err) => {
                 console.log(err)

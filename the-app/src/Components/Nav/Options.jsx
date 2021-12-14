@@ -1,4 +1,5 @@
 import React from 'react'
+import Filters from './Filters/Filters';
 //import NavPlayers from './Players'
 //import NavTeams from './Teams'
 import NavItem from './NavItemClassForInheritance'
@@ -47,6 +48,8 @@ class Options extends React.Component {
                 <NavItem apiAddress='/create'>
                     Create
                 </NavItem>
+
+                <Filters />
 
             </div>
         )
