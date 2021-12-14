@@ -36,7 +36,7 @@ const initialState = {
 
     totalCards: 0,
     pagesAmount: null,
-    amountOnAPage: 6,
+    amountOnAPage: 5,
 }
 
 
