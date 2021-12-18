@@ -20,6 +20,11 @@
     border-radius: 5px;
 }
 
-.profileMenuItem {
-
+.profileMenuItem a {
+    color: #2f2585;
 }
+
+.profileMenuItem:hover a{
+    color: #fd930f;
+}
+

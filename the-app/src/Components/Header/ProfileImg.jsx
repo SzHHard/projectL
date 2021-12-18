@@ -13,13 +13,14 @@ const ProfileImg = (props) => {
 
 
     function toggleProfileMenu() {
+        console.log('toggleMenu')
         setIsActive(!isActive)
     }
 
 
     return (
         <div className={StylesProfileImg.profileImg}>
-            <img tabIndex={0} ref={profileImgRef} onMouseDown = {toggleProfileMenu} alt={'profileImg'} src={szh} />
+            <img tabIndex={0} ref={profileImgRef} onClick = {toggleProfileMenu} /* onMouseDown = {toggleProfileMenu} */ alt={'profileImg'} src={szh} />
             <ProfileMenu menuRef={menuRef} profileImgRef={profileImgRef} setIsActive={setIsActive} isActive={isActive} />
         </div>
     )

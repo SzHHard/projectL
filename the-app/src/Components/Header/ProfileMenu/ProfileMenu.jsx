@@ -1,24 +1,28 @@
-import React, { useEffect, } from 'react';
+import React, { useEffect, useRef} from 'react';
 import styles from './ProfileMenu.module.css';
 import { NavLink } from 'react-router-dom'
 
 const ProfileMenu = (props) => {
 
+    let menuRef = useRef();
+
     useEffect(() => {
-
-        if (props.isActive) {
-            props.menuRef.current.focus();
+        let handler = (event) => {
+            if(!menuRef.current.contains(event.target) && props.profileImgRef.current !== event.target) {
+                props.setIsActive(false)
+            }
         }
-    }, [props.isActive])
+        document.addEventListener('mousedown', handler)
+        
+        return () => {
+            document.removeEventListener('mousedown', handler)
+        }
+    })
 
-
-    const closeMenu = () => {
-        props.setIsActive(false);
-    }
 
     return (
-        <div tabIndex="0" ref={props.menuRef} onBlur={closeMenu} className={`${styles.profileMenu} ${props.isActive ? styles.active : ''} `}>
-            <div className={styles.profileMenuItem}>
+        <div tabIndex="0" ref={menuRef} className={`${styles.profileMenu} ${props.isActive ? styles.active : ''} `}>
+            <div   className={styles.profileMenuItem}>
                 <NavLink to='/account'> <h5>Account</h5> </NavLink>
             </div>
         </div>
