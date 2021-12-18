@@ -1,10 +1,15 @@
 .profileImg {
-    cursor: pointer;
+  
     display: flex;
     width: 40px;
     align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px; 
+    margin-top: 2px;
   }
   .profileImg img {
+    cursor: pointer;
     height: 35px;
     border-radius: 100px;
   }

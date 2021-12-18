@@ -80,22 +80,22 @@
 }
 .roles .mainRoles {
     font-family: Roboto;
-    font-size: 12px;
+    font-size: 14px;
     border: 1px solid  #FFD875;
-    border-radius: 100px;
+    border-radius: 15px;
     background-color: #FFD875;
     margin: 3px;
     padding: 4px;
 }
 .roles .offRoles {
     font-family: Roboto;
-    font-size: 12px;
+    font-size: 14px;
     margin-left: 7px;
     display: inline-block;
     min-width: 30px;
     padding: 4px;
     border: 1px solid #C4C4C4;
-    border-radius: 100px;
+    border-radius: 15px;
     background-color: #C4C4C4;
 }
 
