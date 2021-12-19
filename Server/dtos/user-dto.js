@@ -5,5 +5,6 @@ module.exports = class UserDto {
         this.id = model._id;
         this.isActivated = model.isActivated;
         this.profileName = model.profileName;
+        this.avatarPath = model.avatarPath;
     }
 }

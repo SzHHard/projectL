@@ -6,13 +6,15 @@ import thunkMiddleware from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form';
 import usersReducer from "./usersReducer";
 import interceptor from '../utils/interceptors';
+import avatarReducer from "./AvatarReducer";
 
 let reducers = combineReducers({
     Users: usersReducer,
     Players: playersReducer, 
     Teams: teamsReducer,
     CurrentUserInfo: currentUserReducer,
-   
+    AvatarReducer: avatarReducer,
+    
     form: formReducer,
 }) 
 

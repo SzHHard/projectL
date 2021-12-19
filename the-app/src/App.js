@@ -17,6 +17,7 @@ import AllUsers from './Components/MainContent/Users/AllUsers.jsx'
 import { connect } from 'react-redux'
 import {checkAuthTC} from './State/CurrentUserReducer';
 import MyPlayerCards from './Components/MainContent/MyCardsAndStuff/MyPlayerCards.jsx'
+import ProfileSettingsContainer from './Components/MainContent/AccountSettings/ProfileSettingsContainer.jsx'
 
 
 class App extends React.Component {
@@ -42,6 +43,7 @@ componentDidMount() {
                 <Route index path='home' element ={<MainPanel />} />
                 <Route path='registration' element={<RegistrationForm />} />
                 <Route path='login' element={<LoginFormContainer />} />
+                <Route path='account' element={<ProfileSettingsContainer />} />
                 <Route path='players' element={<PlayersContainer  />} />
                 <Route path='myCards' element={<MyPlayerCards />} />
                 <Route path='teams' element={<TeamsComponent Teams={this.props.state.Teams} />} />
